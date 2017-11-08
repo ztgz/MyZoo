@@ -128,6 +128,8 @@ namespace MyZoo.DAL
                         ChildId = animal.Id,
                         ParentId = parent1
                     };
+
+                    db.Relations.Add(relation);
                 }
 
                 if (parent2 != 0 && parent2 != parent1)
@@ -137,6 +139,8 @@ namespace MyZoo.DAL
                         ChildId = animal.Id,
                         ParentId = parent2
                     };
+
+                    db.Relations.Add(relation);
                 }
 
                 db.SaveChanges();
