@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using MyZoo.DataContext;
@@ -58,6 +59,68 @@ namespace MyZoo.DAL
             }
 
             return animalInfos;
+        }
+
+        public BindingList<Species> GetSpecieses()
+        {
+            BindingList<Species> specieses;
+
+            using (var db = new ZooContext())
+            {
+                var species = from specie in db.Species
+                    select specie;
+
+                specieses = new BindingList<Species>(species.ToList());
+            }
+            
+            return specieses;
+        }
+
+        public SpeciesInfo GetSpecieInfo(string speciesName)
+        {
+            SpeciesInfo specie = null;
+
+            using (var db = new ZooContext())
+            {
+                Species species = db.Species.SingleOrDefault(s => s.SName == speciesName);
+                if (species != null)
+                {
+                    specie = new SpeciesInfo()
+                    {
+                        Id = species.Id,
+                        SpeciesName = species.SName,
+                        EnviormentName = species.Enviorment.EName,
+                        CountryName = species.Country,
+                        FoodTypName = species.FoodType.FName
+                    };
+                }
+                
+            }
+
+            return specie;
+        }
+
+        public bool AddAnimal(string speciesName, decimal? weight)
+        {
+            using (var db = new ZooContext())
+            {
+                Species species = db.Species.SingleOrDefault(s => s.SName == speciesName);
+
+                if (species == null)
+                    return false;
+
+                Animal animal = new Animal()
+                {
+                    Species = species,
+                    AnimalWeight = weight
+                };
+
+                db.Animal.Add(animal);
+
+                db.SaveChanges();
+            }
+
+            return true;
         }
     }
     

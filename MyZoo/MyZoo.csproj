@@ -68,6 +68,7 @@
     <Compile Include="DataContext\Veterinary.cs" />
     <Compile Include="DataContext\ZooContext.cs" />
     <Compile Include="Models\AnimalInfo.cs" />
+    <Compile Include="Models\SpeciesInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Zoo.cs">
