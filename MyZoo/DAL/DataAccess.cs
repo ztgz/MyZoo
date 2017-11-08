@@ -100,7 +100,7 @@ namespace MyZoo.DAL
             return specie;
         }
 
-        public bool AddAnimal(string speciesName, decimal? weight)
+        public bool AddAnimal(string speciesName, decimal? weight, int parent1, int parent2)
         {
             using (var db = new ZooContext())
             {
@@ -115,7 +115,29 @@ namespace MyZoo.DAL
                     AnimalWeight = weight
                 };
 
+
                 db.Animal.Add(animal);
+
+                db.SaveChanges();
+
+                //Add parents
+                if (parent1 != 0)
+                {
+                    Relations relation = new Relations
+                    {
+                        ChildId = animal.Id,
+                        ParentId = parent1
+                    };
+                }
+
+                if (parent2 != 0 && parent2 != parent1)
+                {
+                    Relations relation = new Relations
+                    {
+                        ChildId = animal.Id,
+                        ParentId = parent2
+                    };
+                }
 
                 db.SaveChanges();
             }

@@ -19,7 +19,6 @@ namespace MyZoo.DAL
             _dataAccess = new DataAccess();
         }
 
-
         public BindingList<AnimalInfo> GetAnimalInfos(string foodType, string species, string enviorment)
         {
             return _dataAccess.GetAnimalInfos(foodType, species, enviorment);
@@ -35,9 +34,9 @@ namespace MyZoo.DAL
             return _dataAccess.GetSpecieInfo(speciesName);
         }
 
-        public bool AddAnimal(string speciesName, decimal? weight)
+        public bool AddAnimal(string speciesName, decimal? weight, int parent1, int parent2)
         {
-            return _dataAccess.AddAnimal(speciesName, weight);
+            return _dataAccess.AddAnimal(speciesName, weight, parent1, parent2);
         }
 
         public List<int> GetAnimalsOfType(string speciesName)

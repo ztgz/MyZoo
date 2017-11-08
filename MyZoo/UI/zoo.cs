@@ -63,21 +63,28 @@ namespace MyZoo.UI
             foodTypeAddTextBox.Text = sInfo.FoodTypName;
             countryAddBox.Text = sInfo.CountryName;
 
-            //Load possible parrents
+            AddParentsToComboBox();
+
+        }
+
+        private void AddParentsToComboBox()
+        {
+            //Set default parent1 to 0
             parent1ComboBox.Items.Clear();
             parent1ComboBox.Items.Add(0);
             parent1ComboBox.SelectedIndex = 0;
 
+            //Set default parent2 to 0
             parent2ComboBox.Items.Clear();
             parent2ComboBox.Items.Add(0);
             parent2ComboBox.SelectedIndex = 0;
 
+            //Load possible parrents into combo boxes
             foreach (var id in _sqlCommands.GetAnimalsOfType(speciesComboBox.Text))
             {
                 parent1ComboBox.Items.Add(id);
                 parent2ComboBox.Items.Add(id);
             }
-
         }
         
 
@@ -88,8 +95,15 @@ namespace MyZoo.UI
 
         private void animalAddBTN_Click(object sender, EventArgs e)
         {
+            //Get weight of animal
             decimal.TryParse(weightAddTextBox.Text, out decimal weight);
-            _sqlCommands.AddAnimal(speciesComboBox.Text, weight);
+
+            //Get Id of parents
+            int.TryParse(parent1ComboBox.Text, out int parent1);
+            int.TryParse(parent2ComboBox.Text, out int parent2);
+
+            _sqlCommands.AddAnimal(speciesComboBox.Text, weight, parent1, parent2 );
+
             weightAddTextBox.Text = "";
         }
     }
