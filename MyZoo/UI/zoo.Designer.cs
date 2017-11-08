@@ -51,6 +51,10 @@
             this.countryAddBox = new System.Windows.Forms.TextBox();
             this.addSpeciesBTN = new System.Windows.Forms.Button();
             this.animalAddBTN = new System.Windows.Forms.Button();
+            this.parent1ComboBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.parent2ComboBox = new System.Windows.Forms.ComboBox();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.weightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.speciesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,10 +64,6 @@
             this.parent1IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parent2IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.animalInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.parent1ComboBox = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.parent2ComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.searchDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.animalInfoBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -263,6 +263,7 @@
             this.addSpeciesBTN.TabIndex = 19;
             this.addSpeciesBTN.Text = "Add New Species";
             this.addSpeciesBTN.UseVisualStyleBackColor = true;
+            this.addSpeciesBTN.Click += new System.EventHandler(this.addSpeciesBTN_Click);
             // 
             // animalAddBTN
             // 
@@ -273,6 +274,42 @@
             this.animalAddBTN.Text = "Add Animal";
             this.animalAddBTN.UseVisualStyleBackColor = true;
             this.animalAddBTN.Click += new System.EventHandler(this.animalAddBTN_Click);
+            // 
+            // parent1ComboBox
+            // 
+            this.parent1ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parent1ComboBox.FormattingEnabled = true;
+            this.parent1ComboBox.Location = new System.Drawing.Point(732, 87);
+            this.parent1ComboBox.Name = "parent1ComboBox";
+            this.parent1ComboBox.Size = new System.Drawing.Size(194, 24);
+            this.parent1ComboBox.TabIndex = 21;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(652, 90);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(62, 17);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Parent 1";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(652, 140);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(62, 17);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Parent 2";
+            // 
+            // parent2ComboBox
+            // 
+            this.parent2ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parent2ComboBox.FormattingEnabled = true;
+            this.parent2ComboBox.Location = new System.Drawing.Point(732, 137);
+            this.parent2ComboBox.Name = "parent2ComboBox";
+            this.parent2ComboBox.Size = new System.Drawing.Size(194, 24);
+            this.parent2ComboBox.TabIndex = 23;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -333,42 +370,6 @@
             // animalInfoBindingSource
             // 
             this.animalInfoBindingSource.DataSource = typeof(MyZoo.Models.AnimalInfo);
-            // 
-            // parent1ComboBox
-            // 
-            this.parent1ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parent1ComboBox.FormattingEnabled = true;
-            this.parent1ComboBox.Location = new System.Drawing.Point(732, 87);
-            this.parent1ComboBox.Name = "parent1ComboBox";
-            this.parent1ComboBox.Size = new System.Drawing.Size(194, 24);
-            this.parent1ComboBox.TabIndex = 21;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(652, 90);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(62, 17);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "Parent 1";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(652, 140);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(62, 17);
-            this.label9.TabIndex = 24;
-            this.label9.Text = "Parent 2";
-            // 
-            // parent2ComboBox
-            // 
-            this.parent2ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parent2ComboBox.FormattingEnabled = true;
-            this.parent2ComboBox.Location = new System.Drawing.Point(732, 137);
-            this.parent2ComboBox.Name = "parent2ComboBox";
-            this.parent2ComboBox.Size = new System.Drawing.Size(194, 24);
-            this.parent2ComboBox.TabIndex = 23;
             // 
             // Zoo
             // 

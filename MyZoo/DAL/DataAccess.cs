@@ -115,7 +115,6 @@ namespace MyZoo.DAL
                     AnimalWeight = weight
                 };
 
-
                 db.Animal.Add(animal);
 
                 db.SaveChanges();
@@ -147,6 +146,30 @@ namespace MyZoo.DAL
             }
 
             return true;
+        }
+
+        public List<Enviorment> GetEnviorments()
+        {
+            List<Enviorment> enviorments = new List<Enviorment>();
+
+            using (var db = new ZooContext())
+            {
+                enviorments = db.Enviorment.ToList();
+            }
+
+            return enviorments;
+        }
+
+        public List<FoodType> GetFoodTypes()
+        {
+            List<FoodType> foodTypes = new List<FoodType>();
+
+            using (var db = new ZooContext())
+            {
+                foodTypes = db.FoodType.ToList();
+            }
+
+            return foodTypes;
         }
     }
     

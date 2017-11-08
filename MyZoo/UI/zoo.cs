@@ -106,5 +106,11 @@ namespace MyZoo.UI
 
             weightAddTextBox.Text = "";
         }
+
+        private void addSpeciesBTN_Click(object sender, EventArgs e)
+        {
+            AddSpecies addSpeciesForm = new AddSpecies(this);
+            addSpeciesForm.Show();
+        }
     }
 }

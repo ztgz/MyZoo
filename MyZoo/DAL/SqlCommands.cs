@@ -45,5 +45,19 @@ namespace MyZoo.DAL
 
             return info.Select(s => s.Id).ToList();
         }
+
+        public List<String> GetEnviormentsNames()
+        {
+            var enviorments = _dataAccess.GetEnviorments();
+
+            return enviorments.Select(e => e.EName).ToList();
+        }
+
+        public List<String> GetFoodTypeNames()
+        {
+            var foodTypes = _dataAccess.GetFoodTypes();
+
+            return foodTypes.Select(f => f.FName).ToList();
+        }
     }
 }
