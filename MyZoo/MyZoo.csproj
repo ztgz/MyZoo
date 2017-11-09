@@ -83,6 +83,12 @@
     <Compile Include="UI\EditAnimal.Designer.cs">
       <DependentUpon>EditAnimal.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\EditParents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EditParents.Designer.cs">
+      <DependentUpon>EditParents.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\EditSpecies.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EditAnimal.resx">
       <DependentUpon>EditAnimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\EditParents.resx">
+      <DependentUpon>EditParents.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EditSpecies.resx">
       <DependentUpon>EditSpecies.cs</DependentUpon>

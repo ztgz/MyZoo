@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using MyZoo.DataContext;
 using MyZoo.Models;
 
@@ -239,6 +242,64 @@ namespace MyZoo.DAL
             }
 
             return editedAnimal;
+        }
+
+        public bool EditParents(int animalId, int parent1Id, int parent2Id)
+        {
+            bool editedParents = false;
+
+            using (var db = new ZooContext())
+            {
+                Animal animal = db.Animal.SingleOrDefault(a => a.Id == animalId);
+
+                List<Relations> relationships = db.Relations.ToList();
+
+                //remove old parents
+                for (int i = relationships.Count - 1; i >= 0; i--)
+                {
+                    if (relationships[i].ChildId == animalId)
+                    {
+                        //db.Relations.Attach(relationships[i]);
+                        //db.Relations.Remove(relationships[i]);
+                        db.Entry(relationships[i]).State = EntityState.Deleted;
+                    }
+                }
+
+                db.SaveChanges();
+                
+                //Add relations
+                if (parent1Id > 0)
+                {
+                    Animal parent = db.Animal.SingleOrDefault(a => a.Id == parent1Id);
+                    
+                    Relations relations = new Relations()
+                    {
+                        Animal1 = parent,
+                        Animal = animal
+                    };
+
+                    db.Relations.Add(relations);
+                }
+
+                if (parent2Id > 0)
+                {
+                    Animal parent = db.Animal.SingleOrDefault(a => a.Id == parent2Id);
+
+                    Relations relations = new Relations()
+                    {
+                        Animal1 = parent,
+                        Animal = animal
+                    };
+
+                    db.Relations.Add(relations);
+                }
+
+                db.SaveChanges();
+
+                editedParents = true;
+            }
+
+            return editedParents;
         }
 
     }

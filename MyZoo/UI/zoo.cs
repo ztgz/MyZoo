@@ -134,7 +134,6 @@ namespace MyZoo.UI
                 //if row is selected
                 if (searchDataGridView.Rows[i].Selected)
                 {
-                    
                     return i;
                 }
 
@@ -143,7 +142,6 @@ namespace MyZoo.UI
                 {
                     if (searchDataGridView[x, i].Selected)
                     {
-                        
                         return i;
                     }
                 }
@@ -159,5 +157,27 @@ namespace MyZoo.UI
             EditAnimal editForm = new EditAnimal(animalId, weight);
             editForm.Show();
         }
+
+        private void editParentsBTN_Click(object sender, EventArgs e)
+        {
+            int row = GetIndexOfSelectedRowOrCell();
+            if (row >= 0)
+            {
+                //Get Id from first column, which is id
+                int id = (int)searchDataGridView[0, row].Value;
+                if (id > 0)
+                {
+                    //Add id, speice, parent1, parent2
+                    EditParents parentsForm = new EditParents(id, 
+                      searchDataGridView[2, row].Value.ToString(),
+                      int.Parse(searchDataGridView[6, row].Value.ToString()),
+                      int.Parse(searchDataGridView[7, row].Value.ToString())
+                      );
+                    parentsForm.Show();
+                }
+            }
+        }
+
+        
     }
 }

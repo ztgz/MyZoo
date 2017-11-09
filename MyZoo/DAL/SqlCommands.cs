@@ -82,5 +82,10 @@ namespace MyZoo.DAL
         {
             return _dataAccess.EditAnimal(id, specie, weight);
         }
+
+        public bool EditParents(int animalId, int parent1Id, int parent2Id)
+        {
+            return _dataAccess.EditParents(animalId, parent1Id, parent2Id);
+        }
     }
 }

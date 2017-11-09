@@ -402,6 +402,7 @@
             this.editParentsBTN.TabIndex = 27;
             this.editParentsBTN.Text = "Select Parents";
             this.editParentsBTN.UseVisualStyleBackColor = true;
+            this.editParentsBTN.Click += new System.EventHandler(this.editParentsBTN_Click);
             // 
             // Zoo
             // 
