@@ -220,6 +220,27 @@ namespace MyZoo.DAL
             return specieEdited;
         }
 
+        public bool EditAnimal(int id, string specie, decimal? weight)
+        {
+            bool editedAnimal = false;
+
+            using (var db = new ZooContext())
+            {
+                Animal animal = db.Animal.SingleOrDefault(a => a.Id == id);
+
+                Species species = db.Species.SingleOrDefault(s => s.SName == specie);
+
+                animal.Species = species;
+                animal.AnimalWeight = weight;
+
+                db.SaveChanges();
+
+                editedAnimal = true;
+            }
+
+            return editedAnimal;
+        }
+
     }
     
 }

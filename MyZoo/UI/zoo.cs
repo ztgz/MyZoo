@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Forms;
 using MyZoo.DataContext;
 using MyZoo.DAL;
@@ -20,15 +21,10 @@ namespace MyZoo.UI
             speciesList = null;
 
             _sqlCommands = new SqlCommands();
-            
-            InitialLoad();
-        }
 
-        private void InitialLoad()
-        {
             LoadSpeciesComboBox();
         }
-
+        
         public void LoadSpeciesComboBox()
         {
             speciesComboBox.Items.Clear();
@@ -112,6 +108,56 @@ namespace MyZoo.UI
             EditSpecies editSpecies = new EditSpecies(this, speciesComboBox.Text, countryAddBox.Text);
 
             editSpecies.Show();
+        }
+
+        private void editBTN_Click(object sender, EventArgs e)
+        {
+            int row = GetIndexOfSelectedRowOrCell();
+            if (row >= 0)
+            {
+                //Get Id from first column, which is id
+                int id = (int)searchDataGridView[0, row].Value;
+                if (id > 0)
+                {
+                    //Try to get weight from animal
+                    decimal.TryParse(searchDataGridView[1,row].Value.ToString(), out decimal weight);
+                    OpenAnimalEditForm(id, weight);
+                }
+            }
+
+        }
+
+        private int GetIndexOfSelectedRowOrCell()
+        {
+            for (int i = 0; i < searchDataGridView.RowCount; i++)
+            {
+                //if row is selected
+                if (searchDataGridView.Rows[i].Selected)
+                {
+                    
+                    return i;
+                }
+
+                //if cell is selected
+                for (int x = 0; x < searchDataGridView.ColumnCount; x++)
+                {
+                    if (searchDataGridView[x, i].Selected)
+                    {
+                        
+                        return i;
+                    }
+                }
+            }
+
+            return -1;
+        }
+
+        private void OpenAnimalEditForm(int animalId, decimal? weight)
+        {
+
+            //Open edit form
+            EditAnimal editForm = new EditAnimal(animalId, weight);
+            editForm.Show();
         }
     }
 }

@@ -77,6 +77,12 @@
     <Compile Include="UI\AddSpecies.Designer.cs">
       <DependentUpon>AddSpecies.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\EditAnimal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EditAnimal.Designer.cs">
+      <DependentUpon>EditAnimal.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\EditSpecies.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </Compile>
     <EmbeddedResource Include="UI\AddSpecies.resx">
       <DependentUpon>AddSpecies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\EditAnimal.resx">
+      <DependentUpon>EditAnimal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EditSpecies.resx">
       <DependentUpon>EditSpecies.cs</DependentUpon>

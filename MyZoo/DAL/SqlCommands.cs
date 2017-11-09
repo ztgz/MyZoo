@@ -77,5 +77,10 @@ namespace MyZoo.DAL
         {
             return _dataAccess.EditSpecie(name, enviorment, foodType, country);
         }
+
+        public bool EditAnimal(int id, string specie, decimal? weight)
+        {
+            return _dataAccess.EditAnimal(id, specie, weight);
+        }
     }
 }
