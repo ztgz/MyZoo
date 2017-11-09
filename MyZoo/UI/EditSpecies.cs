@@ -15,14 +15,14 @@ namespace MyZoo.UI
     {
         private Zoo zoo;
 
-        private readonly SqlCommands _sqlCommands;
+        private DataAccess _dataAccess;
 
         public EditSpecies(Zoo zoo, string speciesName, string country)
         {
             InitializeComponent();
             this.zoo = zoo;
 
-            _sqlCommands = new SqlCommands();
+            _dataAccess = new DataAccess();
 
             speciesNameTextBox.Text = speciesName;
 
@@ -35,7 +35,7 @@ namespace MyZoo.UI
 
         private void LoadEnviorments()
         {
-            var enviorments = _sqlCommands.GetEnviormentsNames();
+            var enviorments = _dataAccess.GetEnviormentsNames();
 
             foreach (var enviorment in enviorments)
             {
@@ -47,7 +47,7 @@ namespace MyZoo.UI
 
         private void LoadFoodTypes()
         {
-            var foodTypes = _sqlCommands.GetFoodTypeNames();
+            var foodTypes = _dataAccess.GetFoodTypeNames();
 
             foreach (var foodType in foodTypes)
             {
@@ -60,7 +60,7 @@ namespace MyZoo.UI
         private void editSpeciesBTN_Click(object sender, EventArgs e)
         {
 
-            if (_sqlCommands.EditSpecies(speciesNameTextBox.Text, enviormentComboBox.Text, foodTypeComboBox.Text,
+            if (_dataAccess.EditSpecie(speciesNameTextBox.Text, enviormentComboBox.Text, foodTypeComboBox.Text,
                 countryTextBox.Text))
             {
                 infoLabel.Text = speciesNameTextBox.Text + " were succesfully edited.";

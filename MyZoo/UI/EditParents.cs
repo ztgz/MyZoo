@@ -1,12 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MyZoo.DAL;
 
@@ -19,13 +12,13 @@ namespace MyZoo.UI
         private int parent1Id;
         private int parent2Id;
 
-        private SqlCommands _sqlCommands;
+        private DataAccess _dataAccess;
 
         public EditParents(int animalId, string animalSpecie, int parent1Id, int parent2Id)
         {
             InitializeComponent();
 
-            _sqlCommands = new SqlCommands();
+            _dataAccess = new DataAccess();
 
             this.animalId = animalId;
             infoLabel.Text = "Parents to animal id " + animalId;
@@ -52,7 +45,7 @@ namespace MyZoo.UI
             parent2ComboBox.SelectedIndex = 0;
 
             //Load possible parrents into combo boxes
-            List<int> parentsIDs = _sqlCommands.GetAnimalsOfType(animalSpecie);
+            List<int> parentsIDs = _dataAccess.GetAnimalsOfType(animalSpecie);
 
             for (int i = 0; i < parentsIDs.Count; i++)
             {
@@ -75,7 +68,7 @@ namespace MyZoo.UI
         private void editParentsBTN_Click(object sender, EventArgs e)
         {
             //edit parents
-            if (_sqlCommands.EditParents(animalId, int.Parse(parent1ComboBox.Text),
+            if (_dataAccess.EditParents(animalId, int.Parse(parent1ComboBox.Text),
                 int.Parse(parent2ComboBox.Text)))
             {
                 succesLabel.Text = "Parents were selected.";

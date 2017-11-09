@@ -10,8 +10,8 @@ namespace MyZoo.UI
 {
     public partial class Zoo : Form
     {
-        private SqlCommands _sqlCommands;
-
+        //private SqlCommands _sqlCommands;
+        private DataAccess _dataAccess;
         private BindingList<Species> speciesList;
 
         public Zoo()
@@ -19,8 +19,8 @@ namespace MyZoo.UI
             InitializeComponent();
 
             speciesList = null;
-
-            _sqlCommands = new SqlCommands();
+            
+            _dataAccess = new DataAccess();
 
             LoadSpeciesComboBox();
         }
@@ -29,7 +29,7 @@ namespace MyZoo.UI
         {
             speciesComboBox.Items.Clear();
 
-            speciesList = _sqlCommands.GetSpecieses();
+            speciesList = _dataAccess.GetSpecieses();
             foreach (var specie in speciesList)
             {
                 speciesComboBox.Items.Add(specie.SName);
@@ -47,7 +47,7 @@ namespace MyZoo.UI
 
         private void LoadSpecieInfo()
         {
-            SpeciesInfo sInfo = _sqlCommands.GetSpeciesInfo(speciesComboBox.Text);
+            SpeciesInfo sInfo = _dataAccess.GetSpecieInfo(speciesComboBox.Text);
 
             //Load species info
             enviormentAddTextBox.Text = sInfo.EnviormentName;
@@ -71,7 +71,7 @@ namespace MyZoo.UI
             parent2ComboBox.SelectedIndex = 0;
 
             //Load possible parrents into combo boxes
-            foreach (var id in _sqlCommands.GetAnimalsOfType(speciesComboBox.Text))
+            foreach (var id in _dataAccess.GetAnimalsOfType(speciesComboBox.Text))
             {
                 parent1ComboBox.Items.Add(id);
                 parent2ComboBox.Items.Add(id);
@@ -80,7 +80,12 @@ namespace MyZoo.UI
 
         private void searchBTN_Click(object sender, EventArgs e)
         {
-            searchDataGridView.DataSource = _sqlCommands.GetAnimalInfos(foodTypeSearchBox.Text, speciesSearchBox.Text, enviormentSearchBox.Text);
+            Search();
+        }
+
+        public void Search()
+        {
+            searchDataGridView.DataSource = _dataAccess.GetAnimalInfos(foodTypeSearchBox.Text, speciesSearchBox.Text, enviormentSearchBox.Text);
         }
 
         private void animalAddBTN_Click(object sender, EventArgs e)
@@ -92,11 +97,17 @@ namespace MyZoo.UI
             int.TryParse(parent1ComboBox.Text, out int parent1);
             int.TryParse(parent2ComboBox.Text, out int parent2);
 
-            _sqlCommands.AddAnimal(speciesComboBox.Text, weight, parent1, parent2 );
+            //Add the animal
+            _dataAccess.AddAnimal(speciesComboBox.Text, weight, parent1, parent2 );
 
+            //resert the text box
             weightAddTextBox.Text = "";
 
+            //reload species box
             LoadSpeciesComboBox();
+            
+            //Make new search in searchbox
+            Search();
         }
 
         private void addSpeciesBTN_Click(object sender, EventArgs e)
@@ -114,19 +125,27 @@ namespace MyZoo.UI
 
         private void editBTN_Click(object sender, EventArgs e)
         {
-            int row = GetIndexOfSelectedRowOrCell();
-            if (row >= 0)
+            //Get Id from first column, which is id
+            int id = GetIdOfSelectedRow();
+            if (id > 0)
             {
-                //Get Id from first column, which is id
-                int id = (int)searchDataGridView[0, row].Value;
-                if (id > 0)
-                {
-                    //Try to get weight from animal
-                    decimal.TryParse(searchDataGridView[1,row].Value.ToString(), out decimal weight);
-                    OpenAnimalEditForm(id, weight);
-                }
+                //Try to get weight from animal
+                decimal.TryParse(searchDataGridView[1, GetIndexOfSelectedRowOrCell()].Value.ToString(), out decimal weight);
+                OpenAnimalEditForm(id, weight);
             }
 
+        }
+
+        private int GetIdOfSelectedRow()
+        {
+            int row = GetIndexOfSelectedRowOrCell();
+
+            if (row >= 0)
+            {
+                return (int)searchDataGridView[0, row].Value;
+            }
+
+            return -1;
         }
 
         private int GetIndexOfSelectedRowOrCell()
@@ -154,7 +173,6 @@ namespace MyZoo.UI
 
         private void OpenAnimalEditForm(int animalId, decimal? weight)
         {
-
             //Open edit form
             EditAnimal editForm = new EditAnimal(animalId, weight);
             editForm.Show();
@@ -162,24 +180,33 @@ namespace MyZoo.UI
 
         private void editParentsBTN_Click(object sender, EventArgs e)
         {
-            int row = GetIndexOfSelectedRowOrCell();
-            if (row >= 0)
+            int id = GetIdOfSelectedRow();
+            if (id > 0)
             {
-                //Get Id from first column, which is id
-                int id = (int)searchDataGridView[0, row].Value;
-                if (id > 0)
-                {
-                    //Add id, speice, parent1, parent2
-                    EditParents parentsForm = new EditParents(id, 
-                      searchDataGridView[2, row].Value.ToString(),
-                      int.Parse(searchDataGridView[6, row].Value.ToString()),
-                      int.Parse(searchDataGridView[7, row].Value.ToString())
-                      );
-                    parentsForm.Show();
-                }
+                int row = GetIndexOfSelectedRowOrCell();
+                //Add id, speice, parent1, parent2
+                EditParents parentsForm = new EditParents(id,
+                    searchDataGridView[2, row].Value.ToString(),
+                    int.Parse(searchDataGridView[6, row].Value.ToString()),
+                    int.Parse(searchDataGridView[7, row].Value.ToString())
+                );
+                parentsForm.Show();
             }
         }
 
+        private void deleteBTN_Click(object sender, EventArgs e)
+        {
+            int id = GetIdOfSelectedRow();
+
+            if (id > 0)
+            {
+                _dataAccess.DeleteAnimal(id);
+
+                //Make new search in searchbox
+                Search();
+            }
+        }
         
+
     }
 }

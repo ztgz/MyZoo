@@ -6,7 +6,8 @@ namespace MyZoo.UI
 {
     public partial class AddSpecies : Form
     {
-        private readonly SqlCommands _sqlCommands;
+        //private readonly SqlCommands _sqlCommands;
+        private DataAccess _dataAccess;
 
         private Zoo zoo;
 
@@ -16,7 +17,7 @@ namespace MyZoo.UI
 
             this.zoo = zoo;
 
-            _sqlCommands = new SqlCommands();
+            _dataAccess = new DataAccess();
 
             LoadEnviorments();
 
@@ -25,7 +26,7 @@ namespace MyZoo.UI
         
         private void LoadEnviorments()
         {
-            var enviorments = _sqlCommands.GetEnviormentsNames();
+            var enviorments = _dataAccess.GetEnviormentsNames();
 
             foreach (var enviorment in enviorments)
             {
@@ -37,7 +38,7 @@ namespace MyZoo.UI
 
         private void LoadFoodTypes()
         {
-            var foodTypes = _sqlCommands.GetFoodTypeNames();
+            var foodTypes = _dataAccess.GetFoodTypeNames();
 
             foreach (var foodType in foodTypes)
             {
@@ -54,7 +55,7 @@ namespace MyZoo.UI
 
             if (speciesName.Length > 0)
             {
-                if (_sqlCommands.AddSpecies(speciesName, enviormentComboBox.Text,
+                if (_dataAccess.AddSpecie(speciesName, enviormentComboBox.Text,
                     foodTypeComboBox.Text, country))
                 {
                     infoLabel.Text = "The specie were added.";

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Globalization;
@@ -57,6 +58,13 @@ namespace MyZoo.DAL
             }
 
             return animalInfos;
+        }
+
+        public List<int> GetAnimalsOfType(string speciesName)
+        {
+            var info = GetAnimalInfos("", speciesName, "");
+
+            return info.Select(s => s.Id).ToList();
         }
 
         public BindingList<Species> GetSpecieses()
@@ -158,6 +166,13 @@ namespace MyZoo.DAL
             return enviorments;
         }
 
+        public List<String> GetEnviormentsNames()
+        {
+            var enviorments = GetEnviorments();
+
+            return enviorments.Select(e => e.EName).ToList();
+        }
+
         public List<FoodType> GetFoodTypes()
         {
             List<FoodType> foodTypes = new List<FoodType>();
@@ -170,10 +185,27 @@ namespace MyZoo.DAL
             return foodTypes;
         }
 
+        public List<String> GetFoodTypeNames()
+        {
+            var foodTypes = GetFoodTypes();
+
+            return foodTypes.Select(f => f.FName).ToList();
+        }
+
         public bool AddSpecie(string name, string enviorment, string foodType, string country)
         {
             bool specieAdded = false;
-            
+
+            //get all species
+            var listOfSpecies = GetSpecieses();
+
+            //specie should not be added if it already exist
+            foreach (var speciese in listOfSpecies)
+            {
+                if (speciese.SName == name)
+                    return false;
+            }
+
             using (var db = new ZooContext())
             {
                 FoodType food = db.FoodType.SingleOrDefault(f => f.FName == foodType);
@@ -299,6 +331,39 @@ namespace MyZoo.DAL
             }
 
             return editedParents;
+        }
+
+        public bool DeleteAnimal(int animalId)
+        {
+            bool deletedAnimal = false;
+
+            //remove all relationship where animal is the child
+            EditParents(animalId, 0, 0);
+
+            using (var db = new ZooContext())
+            {
+                //remove all with the animal
+                foreach (var relationse in db.Relations)
+                {
+                    if (relationse.ParentId == animalId || relationse.ParentId == animalId)
+                    {
+                        db.Entry(relationse).State = EntityState.Deleted;
+                    }
+                }
+
+                db.SaveChanges();
+
+                Animal animal = db.Animal.SingleOrDefault(a => a.Id == animalId);
+                //db.Animal.Attach(animal);
+                //db.Animal.Remove(animal);
+                db.Entry(animal).State = EntityState.Deleted;
+
+                db.SaveChanges();
+
+                deletedAnimal = true;
+            }
+
+            return deletedAnimal;
         }
 
     }

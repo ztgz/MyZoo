@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MyZoo.DAL;
 
@@ -14,8 +7,7 @@ namespace MyZoo.UI
 {
     public partial class EditAnimal : Form
     {
-        private SqlCommands _sqlCommands;
-
+        private DataAccess _dataAccess;
         private int animalId;
 
         public EditAnimal(int animalId, decimal? animalWeight)
@@ -23,7 +15,7 @@ namespace MyZoo.UI
             Debug.WriteLine(animalWeight);
             InitializeComponent();
 
-            _sqlCommands = new SqlCommands();
+            _dataAccess = new DataAccess();
 
             this.animalId = animalId;
 
@@ -41,7 +33,7 @@ namespace MyZoo.UI
         {
             speciesComboBox.Items.Clear();
 
-            var speciesList = _sqlCommands.GetSpecieses();
+            var speciesList = _dataAccess.GetSpecieses();
             foreach (var specie in speciesList)
             {
                 speciesComboBox.Items.Add(specie.SName);
@@ -55,7 +47,7 @@ namespace MyZoo.UI
         {
             decimal.TryParse(weightAddTextBox.Text, out decimal weight);
 
-            if (_sqlCommands.EditAnimal(animalId, speciesComboBox.Text, weight))
+            if (_dataAccess.EditAnimal(animalId, speciesComboBox.Text, weight))
             {
                 infoLabel.Text = "Animal successfully edited.";
             }
