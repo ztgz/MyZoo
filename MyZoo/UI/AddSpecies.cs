@@ -15,10 +15,13 @@ namespace MyZoo.UI
     {
         private SqlCommands _sqlCommands;
 
+        private Zoo zoo;
 
         public AddSpecies(Zoo zoo)
         {
             InitializeComponent();
+
+            this.zoo = zoo;
 
             _sqlCommands = new SqlCommands();
 
@@ -49,6 +52,36 @@ namespace MyZoo.UI
             }
 
             foodTypeComboBox.SelectedIndex = 0;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string speciesName = speciesNameTextBox.Text;
+            string country = countryTextBox.Text;
+
+            if (speciesName.Length > 0)
+            {
+                if (_sqlCommands.AddSpecies(speciesName, enviormentComboBox.Text,
+                    foodTypeComboBox.Text, country))
+                {
+                    infoLabel.Text = "The specie were added.";
+
+                    speciesNameTextBox.Text = "";
+                    countryTextBox.Text = "";
+                    
+                    //reload the species combo box in zoo forms
+                    zoo.LoadSpeciesComboBox();
+                }
+                else
+                {
+                    infoLabel.Text = "Could not att specie. " +
+                                  "\nCheck that specie name dosen't exist.";
+                }
+            }
+            else
+            {
+                infoLabel.Text = "You have to specify a name for the specie.";
+            }
         }
     }
 }

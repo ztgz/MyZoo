@@ -36,8 +36,10 @@ namespace MyZoo.UI
 
         }
 
-        private void LoadSpeciesComboBox()
+        public void LoadSpeciesComboBox()
         {
+            speciesComboBox.Items.Clear();
+
             speciesList = _sqlCommands.GetSpecieses();
             foreach (var specie in speciesList)
             {

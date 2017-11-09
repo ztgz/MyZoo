@@ -38,6 +38,7 @@
             this.foodTypeComboBox = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.countryTextBox = new System.Windows.Forms.TextBox();
+            this.infoLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -119,6 +120,7 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "Add Species";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // countryTextBox
             // 
@@ -127,11 +129,20 @@
             this.countryTextBox.Size = new System.Drawing.Size(191, 22);
             this.countryTextBox.TabIndex = 10;
             // 
+            // infoLabel
+            // 
+            this.infoLabel.AutoSize = true;
+            this.infoLabel.Location = new System.Drawing.Point(16, 339);
+            this.infoLabel.Name = "infoLabel";
+            this.infoLabel.Size = new System.Drawing.Size(0, 17);
+            this.infoLabel.TabIndex = 11;
+            // 
             // AddSpecies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(372, 458);
+            this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.countryTextBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.foodTypeComboBox);
@@ -161,5 +172,6 @@
         private System.Windows.Forms.ComboBox foodTypeComboBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox countryTextBox;
+        private System.Windows.Forms.Label infoLabel;
     }
 }

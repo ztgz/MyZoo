@@ -171,6 +171,35 @@ namespace MyZoo.DAL
 
             return foodTypes;
         }
+
+        public bool AddSpecie(string name, string enviorment, string foodType, string country)
+        {
+            bool specieAdded = false;
+            
+            using (var db = new ZooContext())
+            {
+                FoodType food = db.FoodType.SingleOrDefault(f => f.FName == foodType);
+
+                Enviorment env = db.Enviorment.SingleOrDefault(e => e.EName == enviorment);
+
+                Species specie = new Species()
+                {
+                    SName = name,
+                    FoodType = food,
+                    Country = country,
+                    Enviorment = env
+                };
+
+                db.Species.Add(specie);
+
+                db.SaveChanges();
+
+                specieAdded = true;
+            }
+
+            return specieAdded;
+        }
+
     }
     
 }

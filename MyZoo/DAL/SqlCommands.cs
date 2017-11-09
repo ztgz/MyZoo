@@ -59,5 +59,21 @@ namespace MyZoo.DAL
 
             return foodTypes.Select(f => f.FName).ToList();
         }
+
+        public bool AddSpecies(string specieName, string enviorment, string foodType, string country)
+        {
+            //get all species
+            var listOfSpecies = _dataAccess.GetSpecieses();
+
+            //specie should not be added if it already exist
+            foreach (var speciese in listOfSpecies)
+            {
+                if (speciese.SName == specieName)
+                    return false;
+            }
+            
+            //since species does not exist add new specie
+            return _dataAccess.AddSpecie(specieName, enviorment , foodType, country);
+        }
     }
 }
