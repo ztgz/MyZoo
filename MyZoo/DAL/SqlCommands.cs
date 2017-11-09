@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MyZoo.DataContext;
-using MyZoo.DAL;
 using MyZoo.Models;
 
 namespace MyZoo.DAL
@@ -74,6 +71,11 @@ namespace MyZoo.DAL
             
             //since species does not exist add new specie
             return _dataAccess.AddSpecie(specieName, enviorment , foodType, country);
+        }
+
+        public bool EditSpecies(string name, string enviorment, string foodType, string country)
+        {
+            return _dataAccess.EditSpecie(name, enviorment, foodType, country);
         }
     }
 }

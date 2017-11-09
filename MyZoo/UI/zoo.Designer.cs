@@ -55,6 +55,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.parent2ComboBox = new System.Windows.Forms.ComboBox();
+            this.editSpeciesBTN = new System.Windows.Forms.Button();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.weightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.speciesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,6 +65,7 @@
             this.parent1IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parent2IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.animalInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.editBTN = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.searchDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.animalInfoBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -257,9 +259,9 @@
             // 
             // addSpeciesBTN
             // 
-            this.addSpeciesBTN.Location = new System.Drawing.Point(358, 28);
+            this.addSpeciesBTN.Location = new System.Drawing.Point(557, 31);
             this.addSpeciesBTN.Name = "addSpeciesBTN";
-            this.addSpeciesBTN.Size = new System.Drawing.Size(119, 43);
+            this.addSpeciesBTN.Size = new System.Drawing.Size(120, 43);
             this.addSpeciesBTN.TabIndex = 19;
             this.addSpeciesBTN.Text = "Add New Species";
             this.addSpeciesBTN.UseVisualStyleBackColor = true;
@@ -267,9 +269,9 @@
             // 
             // animalAddBTN
             // 
-            this.animalAddBTN.Location = new System.Drawing.Point(985, 124);
+            this.animalAddBTN.Location = new System.Drawing.Point(985, 115);
             this.animalAddBTN.Name = "animalAddBTN";
-            this.animalAddBTN.Size = new System.Drawing.Size(108, 43);
+            this.animalAddBTN.Size = new System.Drawing.Size(108, 52);
             this.animalAddBTN.TabIndex = 20;
             this.animalAddBTN.Text = "Add Animal";
             this.animalAddBTN.UseVisualStyleBackColor = true;
@@ -310,6 +312,16 @@
             this.parent2ComboBox.Name = "parent2ComboBox";
             this.parent2ComboBox.Size = new System.Drawing.Size(194, 24);
             this.parent2ComboBox.TabIndex = 23;
+            // 
+            // editSpeciesBTN
+            // 
+            this.editSpeciesBTN.Location = new System.Drawing.Point(411, 31);
+            this.editSpeciesBTN.Name = "editSpeciesBTN";
+            this.editSpeciesBTN.Size = new System.Drawing.Size(119, 43);
+            this.editSpeciesBTN.TabIndex = 25;
+            this.editSpeciesBTN.Text = "Edit Species";
+            this.editSpeciesBTN.UseVisualStyleBackColor = true;
+            this.editSpeciesBTN.Click += new System.EventHandler(this.editSpeciesBTN_Click);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -371,11 +383,22 @@
             // 
             this.animalInfoBindingSource.DataSource = typeof(MyZoo.Models.AnimalInfo);
             // 
+            // editBTN
+            // 
+            this.editBTN.Location = new System.Drawing.Point(1131, 306);
+            this.editBTN.Name = "editBTN";
+            this.editBTN.Size = new System.Drawing.Size(145, 45);
+            this.editBTN.TabIndex = 26;
+            this.editBTN.Text = "Edit row";
+            this.editBTN.UseVisualStyleBackColor = true;
+            // 
             // Zoo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1146, 563);
+            this.ClientSize = new System.Drawing.Size(1289, 563);
+            this.Controls.Add(this.editBTN);
+            this.Controls.Add(this.editSpeciesBTN);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.parent2ComboBox);
             this.Controls.Add(this.label8);
@@ -448,5 +471,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox parent2ComboBox;
+        private System.Windows.Forms.Button editSpeciesBTN;
+        private System.Windows.Forms.Button editBTN;
     }
 }

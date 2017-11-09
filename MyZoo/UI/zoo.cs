@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MyZoo.DataContext;
 using MyZoo.DAL;
@@ -33,7 +27,6 @@ namespace MyZoo.UI
         private void InitialLoad()
         {
             LoadSpeciesComboBox();
-
         }
 
         public void LoadSpeciesComboBox()
@@ -88,7 +81,6 @@ namespace MyZoo.UI
                 parent2ComboBox.Items.Add(id);
             }
         }
-        
 
         private void searchBTN_Click(object sender, EventArgs e)
         {
@@ -113,6 +105,13 @@ namespace MyZoo.UI
         {
             AddSpecies addSpeciesForm = new AddSpecies(this);
             addSpeciesForm.Show();
+        }
+
+        private void editSpeciesBTN_Click(object sender, EventArgs e)
+        {
+            EditSpecies editSpecies = new EditSpecies(this, speciesComboBox.Text, countryAddBox.Text);
+
+            editSpecies.Show();
         }
     }
 }

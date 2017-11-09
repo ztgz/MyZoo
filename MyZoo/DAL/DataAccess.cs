@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using MyZoo.DataContext;
 using MyZoo.Models;
 
@@ -198,6 +194,30 @@ namespace MyZoo.DAL
             }
 
             return specieAdded;
+        }
+
+        public bool EditSpecie(string name, string enviorment, string foodType, string country)
+        {
+            bool specieEdited = false;
+
+            using (var db = new ZooContext())
+            {
+                FoodType food = db.FoodType.SingleOrDefault(f => f.FName == foodType);
+
+                Enviorment env = db.Enviorment.SingleOrDefault(e => e.EName == enviorment);
+
+                Species specie = db.Species.SingleOrDefault(s => s.SName == name);
+
+                specie.Country = country;
+                specie.Enviorment = env;
+                specie.FoodType = food;
+
+                db.SaveChanges();
+
+                specieEdited = true;
+            }
+
+            return specieEdited;
         }
 
     }
