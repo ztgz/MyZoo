@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\DataAccess.cs" />
-    <Compile Include="DAL\SqlCommands.cs" />
     <Compile Include="DataContext\Animal.cs" />
     <Compile Include="DataContext\Booking.cs" />
     <Compile Include="DataContext\Diagnosis.cs" />
