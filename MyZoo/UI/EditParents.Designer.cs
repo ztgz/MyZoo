@@ -34,6 +34,7 @@
             this.parent1ComboBox = new System.Windows.Forms.ComboBox();
             this.infoLabel = new System.Windows.Forms.Label();
             this.editParentsBTN = new System.Windows.Forms.Button();
+            this.succesLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label9
@@ -91,11 +92,20 @@
             this.editParentsBTN.UseVisualStyleBackColor = true;
             this.editParentsBTN.Click += new System.EventHandler(this.editParentsBTN_Click);
             // 
+            // succesLabel
+            // 
+            this.succesLabel.AutoSize = true;
+            this.succesLabel.Location = new System.Drawing.Point(13, 211);
+            this.succesLabel.Name = "succesLabel";
+            this.succesLabel.Size = new System.Drawing.Size(0, 17);
+            this.succesLabel.TabIndex = 31;
+            // 
             // EditParents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(310, 264);
+            this.Controls.Add(this.succesLabel);
             this.Controls.Add(this.editParentsBTN);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.label9);
@@ -117,5 +127,6 @@
         private System.Windows.Forms.ComboBox parent1ComboBox;
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Button editParentsBTN;
+        private System.Windows.Forms.Label succesLabel;
     }
 }

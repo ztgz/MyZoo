@@ -34,6 +34,7 @@
             this.weightAddTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.editAnimalBTN = new System.Windows.Forms.Button();
+            this.infoLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // animalLabel
@@ -90,11 +91,20 @@
             this.editAnimalBTN.UseVisualStyleBackColor = true;
             this.editAnimalBTN.Click += new System.EventHandler(this.editAnimalBTN_Click);
             // 
+            // infoLabel
+            // 
+            this.infoLabel.AutoSize = true;
+            this.infoLabel.Location = new System.Drawing.Point(13, 229);
+            this.infoLabel.Name = "infoLabel";
+            this.infoLabel.Size = new System.Drawing.Size(0, 17);
+            this.infoLabel.TabIndex = 18;
+            // 
             // EditAnimal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(323, 293);
+            this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.editAnimalBTN);
             this.Controls.Add(this.weightAddTextBox);
             this.Controls.Add(this.label5);
@@ -116,5 +126,6 @@
         private System.Windows.Forms.TextBox weightAddTextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button editAnimalBTN;
+        private System.Windows.Forms.Label infoLabel;
     }
 }

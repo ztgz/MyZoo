@@ -55,9 +55,15 @@ namespace MyZoo.UI
         {
             decimal.TryParse(weightAddTextBox.Text, out decimal weight);
 
-            _sqlCommands.EditAnimal(animalId, speciesComboBox.Text, weight);
+            if (_sqlCommands.EditAnimal(animalId, speciesComboBox.Text, weight))
+            {
+                infoLabel.Text = "Animal successfully edited.";
+            }
+            else
+            {
+                infoLabel.Text = "Edit failed.";
+            }
 
-            this.Close();
         }
     }
 }

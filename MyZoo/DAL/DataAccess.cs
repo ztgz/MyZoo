@@ -53,7 +53,6 @@ namespace MyZoo.DAL
                     }
                 }
                 
-
                 animalInfos = new BindingList<AnimalInfo>(animalList);
             }
 

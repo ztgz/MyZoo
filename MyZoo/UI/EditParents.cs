@@ -74,8 +74,16 @@ namespace MyZoo.UI
 
         private void editParentsBTN_Click(object sender, EventArgs e)
         {
-            _sqlCommands.EditParents(animalId, int.Parse(parent1ComboBox.Text), int.Parse(parent2ComboBox.Text));
-            this.Close();
+            //edit parents
+            if (_sqlCommands.EditParents(animalId, int.Parse(parent1ComboBox.Text),
+                int.Parse(parent2ComboBox.Text)))
+            {
+                succesLabel.Text = "Parents were selected.";
+            }
+            else
+            {
+                succesLabel.Text = "Parents could not be selected.";
+            }
         }
     }
 }

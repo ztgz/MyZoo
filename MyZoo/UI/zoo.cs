@@ -95,6 +95,8 @@ namespace MyZoo.UI
             _sqlCommands.AddAnimal(speciesComboBox.Text, weight, parent1, parent2 );
 
             weightAddTextBox.Text = "";
+
+            LoadSpeciesComboBox();
         }
 
         private void addSpeciesBTN_Click(object sender, EventArgs e)
