@@ -385,6 +385,34 @@ namespace MyZoo.DAL
 
             return infos;
         }
+
+        public BindingList<Booking> GetBookingsForAnimal(int animalId)
+        {
+            BindingList<Booking> bookings = null;
+
+            using (var db = new ZooContext())
+            {
+                var bookedTimes = db.Booking.Where(b => b.AnimalId == animalId);
+                
+                bookings = new BindingList<Booking>(bookedTimes.ToList());
+            }
+
+            return bookings;
+        }
+
+        public BindingList<Booking> GetBookingsForVeterinary(int veterinary)
+        {
+            BindingList<Booking> bookings = null;
+
+            using (var db = new ZooContext())
+            {
+                var bookedTimes = db.Booking.Where(b => b.VeterinaryId == veterinary);
+
+                bookings = new BindingList<Booking>(bookedTimes.ToList());
+            }
+
+            return bookings;
+        }
     }
     
 }

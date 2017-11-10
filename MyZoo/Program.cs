@@ -17,7 +17,8 @@ namespace MyZoo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Zoo());
+            //Application.Run(new Zoo());
+            Application.Run(new Booking());
         }
     }
 }

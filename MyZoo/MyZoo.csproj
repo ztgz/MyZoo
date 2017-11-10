@@ -68,7 +68,9 @@
     <Compile Include="DataContext\ZooContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnimalInfo.cs" />
+    <Compile Include="Models\BookedTimes.cs" />
     <Compile Include="Models\BookingInfo.cs" />
+    <Compile Include="Models\SimpleAnimal.cs" />
     <Compile Include="Models\SpeciesInfo.cs" />
     <Compile Include="Models\VetrinaryInfo.cs" />
     <Compile Include="Program.cs" />
@@ -138,7 +140,9 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\MyZoo.Models.AnimalInfo.datasource" />
+    <None Include="Properties\DataSources\MyZoo.Models.BookedTimes.datasource" />
     <None Include="Properties\DataSources\MyZoo.Models.BookingInfo.datasource" />
+    <None Include="Properties\DataSources\MyZoo.Models.SimpleAnimal.datasource" />
     <None Include="Properties\DataSources\MyZoo.Models.VetrinaryInfo.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
