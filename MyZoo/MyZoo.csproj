@@ -105,6 +105,12 @@
     <Compile Include="UI\EditSpecies.Designer.cs">
       <DependentUpon>EditSpecies.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Zoo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EditSpecies.resx">
       <DependentUpon>EditSpecies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\zoo.resx">
       <DependentUpon>Zoo.cs</DependentUpon>
