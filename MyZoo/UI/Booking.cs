@@ -231,7 +231,7 @@ namespace MyZoo.UI
                 }
                 else
                 {
-                    deleteInfoLabel.Text = "You cannot delete times \nafter they started.";
+                    deleteInfoLabel.Text = "You cannot delete booking \nafter it started.";
                 }
 
             }

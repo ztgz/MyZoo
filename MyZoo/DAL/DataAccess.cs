@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
@@ -565,6 +566,24 @@ namespace MyZoo.DAL
             return addedMedecine;
         }
 
+        public void RemoveMedicineRelation(int diagnosisId, string medicineName)
+        {
+            if (string.IsNullOrEmpty(medicineName))
+                return;
+
+            using (var db = new ZooContext())
+            {
+                MedicineDiagnosisRelation medicineRelation = 
+                    db.MedicineDiagnosisRelation.SingleOrDefault(m => m.Medicine.MedicineName == medicineName
+                    && m.DiagnosisId == diagnosisId);
+
+                db.Entry(medicineRelation).State = EntityState.Deleted;
+
+                db.SaveChanges();
+            }
+        }
+
+
         public int CreateAndGetDiagnosisId(int bookingId)
         {
             int id;
@@ -593,6 +612,44 @@ namespace MyZoo.DAL
 
             return id;
         }
+
+        public string GetDiagnosisJournal(int diagnosisId)
+        {
+            string journal = "";
+
+            using (var db = new ZooContext())
+            {
+                //get the diagnosis
+                Diagnosis diagnosis = db.Diagnosis.SingleOrDefault(d => d.Id == diagnosisId);
+
+                //and set text if it's not null
+                if (diagnosis != null)
+                {
+                    journal = diagnosis.Journal;
+                }
+
+            }
+
+            return journal;
+        }
+
+        public void SetDiagnosisJournal(int diagnosisId, string journal)
+        {
+            using (var db = new ZooContext())
+            {
+                //get the diagnosis
+                Diagnosis diagnosis = db.Diagnosis.SingleOrDefault(d => d.Id == diagnosisId);
+
+                //and set text if it's not null
+                if (diagnosis != null)
+                {
+                    diagnosis.Journal = journal;
+
+                    db.SaveChanges();
+                }
+            }
+        }
+
     }
     
 }

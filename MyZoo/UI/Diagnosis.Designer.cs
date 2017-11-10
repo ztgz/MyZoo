@@ -35,8 +35,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.medecinesComboBox = new System.Windows.Forms.ComboBox();
             this.addMedecineBTN = new System.Windows.Forms.Button();
+            this.descriptionTextBox = new System.Windows.Forms.RichTextBox();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.medecineInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.removeMedicine = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.medicineDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.medecineInfoBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -96,11 +98,20 @@
             // 
             this.addMedecineBTN.Location = new System.Drawing.Point(594, 375);
             this.addMedecineBTN.Name = "addMedecineBTN";
-            this.addMedecineBTN.Size = new System.Drawing.Size(121, 34);
+            this.addMedecineBTN.Size = new System.Drawing.Size(157, 44);
             this.addMedecineBTN.TabIndex = 5;
-            this.addMedecineBTN.Text = "Add Medeicine";
+            this.addMedecineBTN.Text = "Add Medicine";
             this.addMedecineBTN.UseVisualStyleBackColor = true;
             this.addMedecineBTN.Click += new System.EventHandler(this.addMedecineBTN_Click);
+            // 
+            // descriptionTextBox
+            // 
+            this.descriptionTextBox.Location = new System.Drawing.Point(18, 248);
+            this.descriptionTextBox.Name = "descriptionTextBox";
+            this.descriptionTextBox.Size = new System.Drawing.Size(393, 94);
+            this.descriptionTextBox.TabIndex = 6;
+            this.descriptionTextBox.Text = "";
+            this.descriptionTextBox.TextChanged += new System.EventHandler(this.descriptionTextBox_TextChanged);
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -113,11 +124,23 @@
             // 
             this.medecineInfoBindingSource.DataSource = typeof(MyZoo.Models.MedecineInfo);
             // 
+            // removeMedicine
+            // 
+            this.removeMedicine.Location = new System.Drawing.Point(436, 375);
+            this.removeMedicine.Name = "removeMedicine";
+            this.removeMedicine.Size = new System.Drawing.Size(137, 44);
+            this.removeMedicine.TabIndex = 7;
+            this.removeMedicine.Text = "Remove Medicine";
+            this.removeMedicine.UseVisualStyleBackColor = true;
+            this.removeMedicine.Click += new System.EventHandler(this.removeMedicine_Click);
+            // 
             // Diagnosis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(763, 431);
+            this.Controls.Add(this.removeMedicine);
+            this.Controls.Add(this.descriptionTextBox);
             this.Controls.Add(this.addMedecineBTN);
             this.Controls.Add(this.medecinesComboBox);
             this.Controls.Add(this.label2);
@@ -143,5 +166,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox medecinesComboBox;
         private System.Windows.Forms.Button addMedecineBTN;
+        private System.Windows.Forms.RichTextBox descriptionTextBox;
+        private System.Windows.Forms.Button removeMedicine;
     }
 }

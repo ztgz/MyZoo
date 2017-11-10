@@ -25,9 +25,12 @@ namespace MyZoo.UI
             //Gets diagnosis number for bookingId
             diagnosisId = _dataAccess.CreateAndGetDiagnosisId(bookingId);
 
+            //info text
             bookingIdLabel.Text = $"Edit information for booking {bookingId}. Journal regarding animal {animalId}"
                 + $"\n Diagnosis {diagnosisId}";
             
+            //Description text
+            descriptionTextBox.Text = _dataAccess.GetDiagnosisJournal(diagnosisId);
 
             FillMedicineComboBox();
 
@@ -77,6 +80,48 @@ namespace MyZoo.UI
 
             //Refill medicinelist
             FillMedicineList();
+        }
+
+        private void descriptionTextBox_TextChanged(object sender, EventArgs e)
+        {
+            _dataAccess.SetDiagnosisJournal(diagnosisId, descriptionTextBox.Text);
+        }
+
+        private void removeMedicine_Click(object sender, EventArgs e)
+        {
+            int rowIndex = GetIndexOfSelectedRowOrCell(medicineDataGridView);
+
+            if (rowIndex >= 0)
+            {
+                string medicineName = medicineDataGridView[0, rowIndex].Value.ToString();
+
+                _dataAccess.RemoveMedicineRelation(diagnosisId, medicineName);
+
+                FillMedicineList();
+            }            
+        }
+
+        private int GetIndexOfSelectedRowOrCell(DataGridView dw)
+        {
+            for (int i = 0; i < dw.RowCount; i++)
+            {
+                //if row is selected
+                if (dw.Rows[i].Selected)
+                {
+                    return i;
+                }
+
+                //if cell is selected
+                for (int x = 0; x < dw.ColumnCount; x++)
+                {
+                    if (dw[x, i].Selected)
+                    {
+                        return i;
+                    }
+                }
+            }
+
+            return -1;
         }
     }
 }
