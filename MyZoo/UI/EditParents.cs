@@ -12,9 +12,11 @@ namespace MyZoo.UI
         private int parent1Id;
         private int parent2Id;
 
+        private Zoo zoo;
+
         private DataAccess _dataAccess;
 
-        public EditParents(int animalId, string animalSpecie, int parent1Id, int parent2Id)
+        public EditParents(int animalId, string animalSpecie, int parent1Id, int parent2Id, Zoo zoo)
         {
             InitializeComponent();
 
@@ -27,6 +29,8 @@ namespace MyZoo.UI
 
             this.parent1Id = parent1Id;
             this.parent2Id = parent2Id;
+
+            this.zoo = zoo;
 
             AddParentsToComboBox();
         }
@@ -54,14 +58,19 @@ namespace MyZoo.UI
                     parent1ComboBox.Items.Add(parentsIDs[i]);
                     parent2ComboBox.Items.Add(parentsIDs[i]);
                 }
+            }
 
-                //Select current parent
-                if(parentsIDs[i] == parent1Id)
-                    parent1ComboBox.SelectedIndex = i + 1;
-
-                //Select current parent
-                if (parentsIDs[i] == parent2Id)
-                    parent2ComboBox.SelectedIndex = i + 1;
+            //Set parents from before, 
+            for (int i = 0; i < parent1ComboBox.Items.Count; i++)
+            {
+                if(int.Parse(parent1ComboBox.Items[i].ToString()) == parent1Id)
+                {
+                    parent1ComboBox.SelectedIndex = i;
+                }
+                if (int.Parse(parent2ComboBox.Items[i].ToString()) == parent2Id)
+                {
+                    parent2ComboBox.SelectedIndex = i;
+                }
             }
         }
 
@@ -77,6 +86,9 @@ namespace MyZoo.UI
             {
                 succesLabel.Text = "Parents could not be selected.";
             }
+
+            //reload the search box
+            zoo.Search();
         }
     }
 }

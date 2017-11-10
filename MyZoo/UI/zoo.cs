@@ -174,7 +174,7 @@ namespace MyZoo.UI
         private void OpenAnimalEditForm(int animalId, decimal? weight)
         {
             //Open edit form
-            EditAnimal editForm = new EditAnimal(animalId, weight);
+            EditAnimal editForm = new EditAnimal(animalId, weight, this);
             editForm.Show();
         }
 
@@ -188,7 +188,8 @@ namespace MyZoo.UI
                 EditParents parentsForm = new EditParents(id,
                     searchDataGridView[2, row].Value.ToString(),
                     int.Parse(searchDataGridView[6, row].Value.ToString()),
-                    int.Parse(searchDataGridView[7, row].Value.ToString())
+                    int.Parse(searchDataGridView[7, row].Value.ToString()),
+                    this
                 );
                 parentsForm.Show();
             }

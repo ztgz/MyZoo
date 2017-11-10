@@ -10,10 +10,13 @@ namespace MyZoo.UI
         private DataAccess _dataAccess;
         private int animalId;
 
-        public EditAnimal(int animalId, decimal? animalWeight)
+        private Zoo zoo;
+
+        public EditAnimal(int animalId, decimal? animalWeight, Zoo zoo)
         {
-            Debug.WriteLine(animalWeight);
             InitializeComponent();
+
+            this.zoo = zoo;
 
             _dataAccess = new DataAccess();
 
@@ -55,7 +58,8 @@ namespace MyZoo.UI
             {
                 infoLabel.Text = "Edit failed.";
             }
-
+            
+            zoo.Search();
         }
     }
 }
