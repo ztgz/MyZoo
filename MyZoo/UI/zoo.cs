@@ -1,17 +1,17 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Forms;
 using MyZoo.DataContext;
 using MyZoo.DAL;
+using MyZoo.Extensions;
 using MyZoo.Models;
 
 namespace MyZoo.UI
 {
     public partial class Zoo : Form
     {
-        //private SqlCommands _sqlCommands;
         private DataAccess _dataAccess;
+
         private BindingList<Species> speciesList;
 
         public Zoo()
@@ -22,10 +22,11 @@ namespace MyZoo.UI
             
             _dataAccess = new DataAccess();
 
-            LoadSpeciesComboBox();
+            LoadSpecies();
         }
         
-        public void LoadSpeciesComboBox()
+        /* ----------------- Methods for loading tables and information ------------------------*/
+        public void LoadSpecies()
         {
             speciesComboBox.Items.Clear();
 
@@ -40,11 +41,6 @@ namespace MyZoo.UI
             LoadSpecieInfo();
         }
 
-        private void SpeciesComboBoxChanged(object sender, EventArgs e)
-        {
-            LoadSpecieInfo();
-        }
-
         private void LoadSpecieInfo()
         {
             SpeciesInfo sInfo = _dataAccess.GetSpecieInfo(speciesComboBox.Text);
@@ -55,7 +51,6 @@ namespace MyZoo.UI
             countryAddBox.Text = sInfo.CountryName;
 
             AddParentsToComboBox();
-
         }
 
         private void AddParentsToComboBox()
@@ -78,35 +73,31 @@ namespace MyZoo.UI
             }
         }
 
-        private void searchBTN_Click(object sender, EventArgs e)
-        {
-            Search();
-        }
-
         public void Search()
         {
             searchDataGridView.DataSource = _dataAccess.GetAnimalInfos(foodTypeSearchBox.Text, speciesSearchBox.Text, enviormentSearchBox.Text);
         }
 
-        private void animalAddBTN_Click(object sender, EventArgs e)
+
+        /* -----------------  ------------------------*/
+        private void OpenAnimalEditForm(int animalId, decimal? weight)
         {
-            //Get weight of animal
-            decimal.TryParse(weightAddTextBox.Text, out decimal weight);
+            this.Hide();
 
-            //Get Id of parents
-            int.TryParse(parent1ComboBox.Text, out int parent1);
-            int.TryParse(parent2ComboBox.Text, out int parent2);
+            //Open edit form
+            EditAnimal editForm = new EditAnimal(animalId, weight, this);
 
-            //Add the animal
-            _dataAccess.AddAnimal(speciesComboBox.Text, weight, parent1, parent2 );
+            editForm.Show();
+        }
 
-            //resert the text box
-            weightAddTextBox.Text = "";
+        /* ----------------- Clicks in form ------------------------*/
+        private void SpeciesComboBoxChanged(object sender, EventArgs e)
+        {
+            LoadSpecieInfo();
+        }
 
-            //reload species box
-            LoadSpeciesComboBox();
-            
-            //Make new search in searchbox
+        private void searchBTN_Click(object sender, EventArgs e)
+        {
             Search();
         }
 
@@ -128,82 +119,42 @@ namespace MyZoo.UI
             editSpecies.Show();
         }
 
+        private void animalAddBTN_Click(object sender, EventArgs e)
+        {
+            //Get weight of animal
+            decimal.TryParse(weightAddTextBox.Text, out decimal weight);
+
+            //Get Id of parents
+            int.TryParse(parent1ComboBox.Text, out int parent1);
+            int.TryParse(parent2ComboBox.Text, out int parent2);
+
+            //Add the animal
+            _dataAccess.AddAnimal(speciesComboBox.Text, weight, parent1, parent2);
+
+            //resert the text box
+            weightAddTextBox.Text = "";
+
+            //Reload species
+            LoadSpecies();
+
+            //Make new search in searchbox
+            Search();
+        }
+
         private void editBTN_Click(object sender, EventArgs e)
         {
-            //Get Id from first column, which is id
             int id = GetIdOfSelectedRow();
+
             if (id > 0)
             {
                 //Try to get weight from animal
-                decimal.TryParse(searchDataGridView[1, GetIndexOfSelectedRowOrCell()].Value.ToString(), out decimal weight);
+                decimal.TryParse(searchDataGridView[1,
+                    HelperMethod.GetSelectedRowIndex(searchDataGridView)].Value.ToString(), 
+                    out decimal weight);
+
                 OpenAnimalEditForm(id, weight);
             }
 
-        }
-
-        private int GetIdOfSelectedRow()
-        {
-            int row = GetIndexOfSelectedRowOrCell();
-
-            if (row >= 0)
-            {
-                return (int)searchDataGridView[0, row].Value;
-            }
-
-            return -1;
-        }
-
-        private int GetIndexOfSelectedRowOrCell()
-        {
-            for (int i = 0; i < searchDataGridView.RowCount; i++)
-            {
-                //if row is selected
-                if (searchDataGridView.Rows[i].Selected)
-                {
-                    return i;
-                }
-
-                //if cell is selected
-                for (int x = 0; x < searchDataGridView.ColumnCount; x++)
-                {
-                    if (searchDataGridView[x, i].Selected)
-                    {
-                        return i;
-                    }
-                }
-            }
-
-            return -1;
-        }
-
-        private void OpenAnimalEditForm(int animalId, decimal? weight)
-        {
-            this.Hide();
-
-            //Open edit form
-            EditAnimal editForm = new EditAnimal(animalId, weight, this);
-            
-            editForm.Show();
-        }
-
-        private void editParentsBTN_Click(object sender, EventArgs e)
-        {
-            int id = GetIdOfSelectedRow();
-            if (id > 0)
-            {
-                int row = GetIndexOfSelectedRowOrCell();
-                //Add id, speice, parent1, parent2
-                EditParents parentsForm = new EditParents(id,
-                    searchDataGridView[2, row].Value.ToString(),
-                    int.Parse(searchDataGridView[6, row].Value.ToString()),
-                    int.Parse(searchDataGridView[7, row].Value.ToString()),
-                    this
-                );
-                
-                this.Hide();
-
-                parentsForm.Show();
-            }
         }
 
         private void deleteBTN_Click(object sender, EventArgs e)
@@ -218,5 +169,42 @@ namespace MyZoo.UI
                 Search();
             }
         }
+
+        private void editParentsBTN_Click(object sender, EventArgs e)
+        {
+            int id = GetIdOfSelectedRow();
+
+            if (id > 0)
+            {
+                int row = HelperMethod.GetSelectedRowIndex(searchDataGridView);
+
+                //Open form with (id, species, parent1, parent2, zoo form)
+                EditParents parentsForm = new EditParents(id,
+                    searchDataGridView[2, row].Value.ToString(),
+                    int.Parse(searchDataGridView[6, row].Value.ToString()),
+                    int.Parse(searchDataGridView[7, row].Value.ToString()),
+                    this
+                );
+
+                this.Hide();
+
+                parentsForm.Show();
+            }
+        }
+
+
+        /* ----------------- Helper Methods ------------------------*/
+        private int GetIdOfSelectedRow()
+        {
+            int row = HelperMethod.GetSelectedRowIndex(searchDataGridView);
+
+            if (row >= 0)
+            {
+                return (int)searchDataGridView[0, row].Value;
+            }
+
+            return -1;
+        }
+        
     }
 }

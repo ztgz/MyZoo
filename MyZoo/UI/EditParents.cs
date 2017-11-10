@@ -23,6 +23,7 @@ namespace MyZoo.UI
             _dataAccess = new DataAccess();
 
             this.animalId = animalId;
+
             infoLabel.Text = "Parents to animal id " + animalId;
 
             this.animalSpecie = animalSpecie;
@@ -32,10 +33,18 @@ namespace MyZoo.UI
 
             this.zoo = zoo;
 
+            //Loads the possible parents to a combo box
             AddParentsToComboBox();
         }
 
-        //private void Load possible parents
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            zoo.Show();
+
+            base.OnFormClosing(e);
+        }
+
+        //Load possible parents
         private void AddParentsToComboBox()
         {
             //Set default parent1 to 0
@@ -48,9 +57,10 @@ namespace MyZoo.UI
             parent2ComboBox.Items.Add(0);
             parent2ComboBox.SelectedIndex = 0;
 
-            //Load possible parrents into combo boxes
+            //Load possible parrents 
             List<int> parentsIDs = _dataAccess.GetAnimalsOfType(animalSpecie);
 
+            //Add parents to comboboxes
             for (int i = 0; i < parentsIDs.Count; i++)
             {
                 if (parentsIDs[i] != animalId)
@@ -60,7 +70,7 @@ namespace MyZoo.UI
                 }
             }
 
-            //Set parents from before, 
+            //Set existing parents to be selected in combobox
             for (int i = 0; i < parent1ComboBox.Items.Count; i++)
             {
                 if(int.Parse(parent1ComboBox.Items[i].ToString()) == parent1Id)
@@ -76,7 +86,7 @@ namespace MyZoo.UI
 
         private void editParentsBTN_Click(object sender, EventArgs e)
         {
-            //edit parents
+            //Edit parents
             if (_dataAccess.EditParents(animalId, int.Parse(parent1ComboBox.Text),
                 int.Parse(parent2ComboBox.Text)))
             {
@@ -96,11 +106,5 @@ namespace MyZoo.UI
             Close();
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            zoo.Show();
-
-            base.OnFormClosing(e);
-        }
     }
 }

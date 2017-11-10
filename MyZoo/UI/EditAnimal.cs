@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 using MyZoo.DAL;
 
@@ -8,6 +7,7 @@ namespace MyZoo.UI
     public partial class EditAnimal : Form
     {
         private DataAccess _dataAccess;
+
         private int animalId;
 
         private Zoo zoo;
@@ -32,11 +32,19 @@ namespace MyZoo.UI
             LoadSpeciesComboBox();
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            zoo.Show();
+
+            base.OnFormClosing(e);
+        }
+
         private void LoadSpeciesComboBox()
         {
             speciesComboBox.Items.Clear();
 
             var speciesList = _dataAccess.GetSpecieses();
+
             foreach (var specie in speciesList)
             {
                 speciesComboBox.Items.Add(specie.SName);
@@ -48,8 +56,10 @@ namespace MyZoo.UI
 
         private void editAnimalBTN_Click(object sender, EventArgs e)
         {
+            //Try to get weight from combo box
             decimal.TryParse(weightAddTextBox.Text, out decimal weight);
 
+            //Edit animal
             if (_dataAccess.EditAnimal(animalId, speciesComboBox.Text, weight))
             {
                 infoLabel.Text = "Animal successfully edited.";
@@ -59,14 +69,8 @@ namespace MyZoo.UI
                 infoLabel.Text = "Edit failed.";
             }
             
+            //Refresh the zoo search list
             zoo.Search();
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            zoo.Show();
-
-            base.OnFormClosing(e);
         }
 
         private void returnBTN_Click(object sender, EventArgs e)

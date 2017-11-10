@@ -78,8 +78,8 @@ namespace MyZoo.UI
                     speciesNameTextBox.Text = "";
                     countryTextBox.Text = "";
                     
-                    //Reload the species combo box in zoo forms
-                    zoo.LoadSpeciesComboBox();
+                    //Reload the species in zoo forms
+                    zoo.LoadSpecies();
                 }
                 else
                 {

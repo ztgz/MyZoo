@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MyZoo.DAL;
 
@@ -31,6 +24,13 @@ namespace MyZoo.UI
             LoadEnviorments();
 
             LoadFoodTypes();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            zoo.Show();
+
+            base.OnFormClosing(e);
         }
 
         private void LoadEnviorments()
@@ -59,14 +59,16 @@ namespace MyZoo.UI
 
         private void editSpeciesBTN_Click(object sender, EventArgs e)
         {
-
+            //Edit specie
             if (_dataAccess.EditSpecie(speciesNameTextBox.Text, enviormentComboBox.Text, foodTypeComboBox.Text,
                 countryTextBox.Text))
             {
                 infoLabel.Text = speciesNameTextBox.Text + " were succesfully edited.";
 
-                zoo.LoadSpeciesComboBox();
+                //Reload species in zoo form
+                zoo.LoadSpecies();
 
+                //Reload search results in zoo form
                 zoo.Search();
             }
             else
@@ -74,13 +76,6 @@ namespace MyZoo.UI
                 infoLabel.Text = speciesNameTextBox.Text + " edit failed.";
             }
 
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            zoo.Show();
-
-            base.OnFormClosing(e);
         }
 
         private void returnBTN_Click(object sender, EventArgs e)
