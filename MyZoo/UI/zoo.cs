@@ -206,7 +206,11 @@ namespace MyZoo.UI
                 Search();
             }
         }
-        
 
+        private void bookingBTN_Click(object sender, EventArgs e)
+        {
+            Booking bookingForm = new Booking();
+            bookingForm.Show();
+        }
     }
 }

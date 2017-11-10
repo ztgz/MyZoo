@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using MyZoo.DataContext;
 using MyZoo.Models;
@@ -366,6 +367,24 @@ namespace MyZoo.DAL
             return deletedAnimal;
         }
 
+        public BindingList<VetrinaryInfo> GetVetrinariesInfo()
+        {
+            BindingList<VetrinaryInfo> infos = null;
+
+            using (var db = new ZooContext())
+            {
+                var vetrinaries = from vet in db.Veterinary
+                    select new VetrinaryInfo()
+                    {
+                        Id = vet.Id,
+                        Name = vet.PersonName
+                    };
+
+                infos = new BindingList<VetrinaryInfo>(vetrinaries.ToList());
+            }
+
+            return infos;
+        }
     }
     
 }
