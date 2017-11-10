@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Globalization;
 using System.Linq;
 using System.Net.Sockets;
@@ -562,6 +563,35 @@ namespace MyZoo.DAL
             }
 
             return addedMedecine;
+        }
+
+        public int CreateAndGetDiagnosisId(int bookingId)
+        {
+            int id;
+
+            using (var db = new ZooContext())
+            {
+                Diagnosis diagnosis = db.Diagnosis.SingleOrDefault(d => d.BookingId == bookingId);
+
+                //if diagnosis dosn't exsist, create diagnosis
+                if (diagnosis == null)
+                {
+                    Booking booking = db.Booking.SingleOrDefault(b => b.Id == bookingId);
+
+                    diagnosis = new Diagnosis
+                    {
+                        Booking = booking
+                    };
+
+                    db.Diagnosis.Add(diagnosis);
+
+                    db.SaveChanges();
+                }
+
+                id = diagnosis.Id;
+            }
+
+            return id;
         }
     }
     

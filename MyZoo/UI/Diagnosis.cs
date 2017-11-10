@@ -22,10 +22,13 @@ namespace MyZoo.UI
         {
             InitializeComponent();
 
-            diagnosisId = bookingId;
+            //Gets diagnosis number for bookingId
+            diagnosisId = _dataAccess.CreateAndGetDiagnosisId(bookingId);
 
-            bookingIdLabel.Text = $"Edit information for booking {bookingId}. Journal regarding animal {animalId}";
+            bookingIdLabel.Text = $"Edit information for booking {bookingId}. Journal regarding animal {animalId}"
+                + $"\n Diagnosis {diagnosisId}";
             
+
             FillMedicineComboBox();
 
             FillMedicineList();
