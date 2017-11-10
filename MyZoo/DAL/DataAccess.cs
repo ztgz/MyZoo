@@ -145,20 +145,29 @@ namespace MyZoo.DAL
             bool deletedAnimal = false;
 
             //remove all relationship where animal is the child
-            EditParents(animalId, 0, 0);
+            //EditParents(animalId, 0, 0);
+
+            //Remove all bookings with animal
+            List<Booking> bookings = GetBookingsForAnimal(animalId).ToList();
+
+            foreach (var booking in bookings)
+            {
+                DeleteBooking(booking.Id);
+            }
 
             using (var db = new ZooContext())
             {
-                //remove all with the animal
+                //remove all relations with the animal
                 foreach (var relationse in db.Relations)
                 {
-                    if (relationse.ParentId == animalId || relationse.ParentId == animalId)
+                    if (relationse.ParentId == animalId || relationse.ChildId == animalId)
                     {
                         db.Entry(relationse).State = EntityState.Deleted;
                     }
                 }
 
                 db.SaveChanges();
+                
 
                 Animal animal = db.Animal.SingleOrDefault(a => a.Id == animalId);
 
