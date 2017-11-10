@@ -19,6 +19,7 @@ namespace MyZoo.DAL
         public BindingList<AnimalInfo> GetAnimalInfos(string foodType, string species, string enviorment)
         {
             BindingList<AnimalInfo> animalInfos;
+
             using (var db = new ZooContext())
             {
 
@@ -64,59 +65,60 @@ namespace MyZoo.DAL
             return animalInfos;
         }
 
-        public List<int> GetAnimalsOfType(string speciesName)
+        public List<int> GetAnimalsIdOfType(string speciesName)
         {
             var info = GetAnimalInfos("", speciesName, "");
 
             return info.Select(s => s.Id).ToList();
         }
 
-        public bool AddAnimal(string speciesName, decimal? weight, int parent1, int parent2)
+        public void AddAnimal(string speciesName, decimal? weight, int parent1, int parent2)
         {
             using (var db = new ZooContext())
             {
+                //Animal is of species type
                 Species species = db.Species.SingleOrDefault(s => s.SName == speciesName);
 
-                if (species == null)
-                    return false;
-
-                Animal animal = new Animal()
+                //only add animal if species is correct
+                if (species != null)
                 {
-                    Species = species,
-                    AnimalWeight = weight
-                };
-
-                db.Animal.Add(animal);
-
-                db.SaveChanges();
-
-                //Add parents
-                if (parent1 != 0)
-                {
-                    Relations relation = new Relations
+                    Animal animal = new Animal()
                     {
-                        ChildId = animal.Id,
-                        ParentId = parent1
+                        Species = species,
+                        AnimalWeight = weight
                     };
+                
+                    db.Animal.Add(animal);
 
-                    db.Relations.Add(relation);
-                }
+                    db.SaveChanges();
 
-                if (parent2 != 0 && parent2 != parent1)
-                {
-                    Relations relation = new Relations
+                    //Add the animals parents
+                    if (parent1 != 0)
                     {
-                        ChildId = animal.Id,
-                        ParentId = parent2
-                    };
+                        Relations relation = new Relations
+                        {
+                            ChildId = animal.Id,
+                            ParentId = parent1
+                        };
 
-                    db.Relations.Add(relation);
+                        db.Relations.Add(relation);
+                    }
+
+                    if (parent2 != 0 && parent2 != parent1)
+                    {
+                        Relations relation = new Relations
+                        {
+                            ChildId = animal.Id,
+                            ParentId = parent2
+                        };
+
+                        db.Relations.Add(relation);
+                    }
+
+                    db.SaveChanges();
                 }
-
-                db.SaveChanges();
             }
 
-            return true;
         }
 
         public bool EditAnimal(int id, string specie, decimal? weight)
@@ -144,10 +146,7 @@ namespace MyZoo.DAL
         {
             bool deletedAnimal = false;
 
-            //remove all relationship where animal is the child
-            //EditParents(animalId, 0, 0);
-
-            //Remove all bookings with animal
+             //All bookings with animal needs to be removed
             List<Booking> bookings = GetBookingsForAnimal(animalId).ToList();
 
             foreach (var booking in bookings)
@@ -157,7 +156,7 @@ namespace MyZoo.DAL
 
             using (var db = new ZooContext())
             {
-                //remove all relations with the animal
+                //All relations with the animal needs to be removed
                 foreach (var relationse in db.Relations)
                 {
                     if (relationse.ParentId == animalId || relationse.ChildId == animalId)
@@ -168,7 +167,7 @@ namespace MyZoo.DAL
 
                 db.SaveChanges();
                 
-
+                //All records that animal depands on has been cleand, now animal can be removed
                 Animal animal = db.Animal.SingleOrDefault(a => a.Id == animalId);
 
                 db.Entry(animal).State = EntityState.Deleted;
@@ -189,8 +188,7 @@ namespace MyZoo.DAL
 
             using (var db = new ZooContext())
             {
-                var species = from specie in db.Species
-                    select specie;
+                var species = from specie in db.Species select specie;
 
                 specieses = new BindingList<Species>(species.ToList());
             }
@@ -205,6 +203,7 @@ namespace MyZoo.DAL
             using (var db = new ZooContext())
             {
                 Species species = db.Species.SingleOrDefault(s => s.SName == speciesName);
+
                 if (species != null)
                 {
                     specie = new SpeciesInfo()
@@ -224,12 +223,10 @@ namespace MyZoo.DAL
 
         public bool AddSpecie(string name, string enviorment, string foodType, string country)
         {
-            bool specieAdded = false;
-
-            //get all species
+            //Get all species
             var listOfSpecies = GetSpecieses();
 
-            //specie should not be added if it already exist
+            //Specie should not be added if it already exist
             foreach (var speciese in listOfSpecies)
             {
                 if (speciese.SName == name)
@@ -253,11 +250,9 @@ namespace MyZoo.DAL
                 db.Species.Add(specie);
 
                 db.SaveChanges();
-
-                specieAdded = true;
             }
 
-            return specieAdded;
+            return true;
         }
 
         public bool EditSpecie(string name, string enviorment, string foodType, string country)
@@ -309,7 +304,7 @@ namespace MyZoo.DAL
         /*---------------------------------Methods regarding food type---------------------------------*/
         public List<FoodType> GetFoodTypes()
         {
-            List<FoodType> foodTypes = new List<FoodType>();
+            List<FoodType> foodTypes;
 
             using (var db = new ZooContext())
             {
@@ -334,24 +329,24 @@ namespace MyZoo.DAL
 
             using (var db = new ZooContext())
             {
+                //Get animal
                 Animal animal = db.Animal.SingleOrDefault(a => a.Id == animalId);
 
+                //Get all relations
                 List<Relations> relationships = db.Relations.ToList();
 
-                //remove old parents
+                //Remove the old parents
                 for (int i = relationships.Count - 1; i >= 0; i--)
                 {
                     if (relationships[i].ChildId == animalId)
                     {
-                        //db.Relations.Attach(relationships[i]);
-                        //db.Relations.Remove(relationships[i]);
                         db.Entry(relationships[i]).State = EntityState.Deleted;
                     }
                 }
 
                 db.SaveChanges();
                 
-                //Add relations
+                //Add new parents
                 if (parent1Id > 0)
                 {
                     Animal parent = db.Animal.SingleOrDefault(a => a.Id == parent1Id);
@@ -390,7 +385,7 @@ namespace MyZoo.DAL
         /*---------------------------------Methods regarding Vetrinaries---------------------------------*/
         public BindingList<VetrinaryInfo> GetVetrinariesInfo()
         {
-            BindingList<VetrinaryInfo> infos = null;
+            BindingList<VetrinaryInfo> infos;
 
             using (var db = new ZooContext())
             {
@@ -411,7 +406,7 @@ namespace MyZoo.DAL
         /*---------------------------------Methods regarding bookings---------------------------------*/
         public BindingList<Booking> GetBookingsForAnimal(int animalId)
         {
-            BindingList<Booking> bookings = null;
+            BindingList<Booking> bookings;
 
             using (var db = new ZooContext())
             {
@@ -425,7 +420,7 @@ namespace MyZoo.DAL
 
         public BindingList<Booking> GetBookingsForVeterinary(int veterinary)
         {
-            BindingList<Booking> bookings = null;
+            BindingList<Booking> bookings;
 
             using (var db = new ZooContext())
             {
@@ -474,7 +469,8 @@ namespace MyZoo.DAL
                 //Get all diagnosies for the booking
                 var diagnosies = db.Diagnosis.Where(d => d.BookingId == bookingId).ToList();
 
-                //Get and remove all connections between medicine and diagonsis, remove all related diagnosis
+                //Get and remove all connections between medicine and diagonsis
+                //and remove all diagnosises
                 for (int i = diagnosies.Count - 1; i >= 0; i--)
                 {
                     Diagnosis diagnois = diagnosies[i];
@@ -492,10 +488,7 @@ namespace MyZoo.DAL
                     db.Entry(diagnois).State = EntityState.Deleted;
                 }
 
-                //save changes
-                //db.SaveChanges();
-
-                //remove booking
+                //Remove booking
                 Booking booking = db.Booking.SingleOrDefault(b => b.Id == bookingId);
                 db.Booking.Attach(booking);
                 db.Booking.Remove(booking);
@@ -509,10 +502,11 @@ namespace MyZoo.DAL
             return removed;
         }
 
+
         /*---------------------------------Methods regarding medicine---------------------------------*/
         public BindingList<MedecineInfo> GetMedicineNames()
         {
-            BindingList<MedecineInfo> medicineList = null;
+            BindingList<MedecineInfo> medicineList;
 
             using (var db = new ZooContext())
             {
@@ -520,6 +514,7 @@ namespace MyZoo.DAL
                 {
                     Name = m.MedicineName
                 });
+
                 medicineList = new BindingList<MedecineInfo>(meds.ToList());
             }
 
@@ -528,7 +523,7 @@ namespace MyZoo.DAL
 
         public BindingList<Medicine> GetMedicinesInDiagnosis(int diagnosisId)
         {
-            BindingList<Medicine> medicineList = null;
+            BindingList<Medicine> medicineList;
 
             using (var db = new ZooContext())
             {
@@ -542,6 +537,7 @@ namespace MyZoo.DAL
 
         public bool TryAddMedecine(string medicineName)
         {
+            //Medicine needs to have an name
             if (string.IsNullOrEmpty(medicineName))
                 return false;
 
@@ -549,7 +545,7 @@ namespace MyZoo.DAL
 
             using (var db = new ZooContext())
             {
-                //add medecien if it does not exist
+                //Add medicine if it does not exist
                 if (db.Medicine.SingleOrDefault(m => m.MedicineName == medicineName) == null)
                 {
                     Medicine med = new Medicine
@@ -598,6 +594,7 @@ namespace MyZoo.DAL
                 //if diagnosis dosn't exsist, create diagnosis
                 if (diagnosis == null)
                 {
+                    //Get the booking related to the Id
                     Booking booking = db.Booking.SingleOrDefault(b => b.Id == bookingId);
 
                     diagnosis = new Diagnosis
@@ -610,6 +607,7 @@ namespace MyZoo.DAL
                     db.SaveChanges();
                 }
 
+                //Id is the same as in the diagnosis
                 id = diagnosis.Id;
             }
 
@@ -622,10 +620,10 @@ namespace MyZoo.DAL
 
             using (var db = new ZooContext())
             {
-                //get the diagnosis
+                //Get the diagnosis
                 Diagnosis diagnosis = db.Diagnosis.SingleOrDefault(d => d.Id == diagnosisId);
 
-                //and set text if it's not null
+                //And get return text if it's not null
                 if (diagnosis != null)
                 {
                     journal = diagnosis.Journal;
@@ -640,10 +638,10 @@ namespace MyZoo.DAL
         {
             using (var db = new ZooContext())
             {
-                //get the diagnosis
+                //Get the diagnosis
                 Diagnosis diagnosis = db.Diagnosis.SingleOrDefault(d => d.Id == diagnosisId);
 
-                //and set text if it's not null
+                //And set text if it's not null
                 if (diagnosis != null)
                 {
                     diagnosis.Journal = journal;

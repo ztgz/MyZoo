@@ -58,11 +58,12 @@ namespace MyZoo.UI
             parent2ComboBox.SelectedIndex = 0;
 
             //Load possible parrents 
-            List<int> parentsIDs = _dataAccess.GetAnimalsOfType(animalSpecie);
+            List<int> parentsIDs = _dataAccess.GetAnimalsIdOfType(animalSpecie);
 
             //Add parents to comboboxes
             for (int i = 0; i < parentsIDs.Count; i++)
             {
+                //Cannot be parent to itself
                 if (parentsIDs[i] != animalId)
                 {
                     parent1ComboBox.Items.Add(parentsIDs[i]);

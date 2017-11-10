@@ -25,6 +25,7 @@ namespace MyZoo.UI
             LoadSpecies();
         }
         
+
         /* ----------------- Methods for loading tables and information ------------------------*/
         public void LoadSpecies()
         {
@@ -66,7 +67,7 @@ namespace MyZoo.UI
             parent2ComboBox.SelectedIndex = 0;
 
             //Load possible parrents into combo boxes
-            foreach (var id in _dataAccess.GetAnimalsOfType(speciesComboBox.Text))
+            foreach (var id in _dataAccess.GetAnimalsIdOfType(speciesComboBox.Text))
             {
                 parent1ComboBox.Items.Add(id);
                 parent2ComboBox.Items.Add(id);
@@ -89,6 +90,7 @@ namespace MyZoo.UI
 
             editForm.Show();
         }
+
 
         /* ----------------- Clicks in form ------------------------*/
         private void SpeciesComboBoxChanged(object sender, EventArgs e)
