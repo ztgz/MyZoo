@@ -77,5 +77,17 @@ namespace MyZoo.UI
                 infoLabel.Text = "You have to specify a name for the specie.";
             }
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            zoo.Show();
+
+            base.OnFormClosing(e);
+        }
+
+        private void returnBTN_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

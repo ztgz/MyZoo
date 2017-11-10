@@ -10,11 +10,13 @@ namespace MyZoo
 {
     public static class Program
     {
+        //Constants for form choises
         public const int RUNMENU = 0;
         public const int RUNZOO = 1;
         public const int RUNVETERINARY = 2;
 
-        public static int activeForm;
+        //Keeps track on which windows will run in the application
+        public static int activeForm; 
 
         /// <summary>
         /// The main entry point for the application.
@@ -25,14 +27,14 @@ namespace MyZoo
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            activeForm = 0;
-            //RunMenu();
-            RunVeterinary();
+            //Start the menu
+            RunMenu();
         }
 
         static void RunMenu()
         {
-            activeForm = 0;
+            activeForm = RUNMENU;
+
             Application.Run(new Menu());
 
             //If veterinary or zoo should be run
@@ -45,6 +47,7 @@ namespace MyZoo
                 RunZoo();
             }
 
+            //If none of the above will run, the program exits
         }
 
         static void RunZoo()
@@ -54,7 +57,6 @@ namespace MyZoo
             //Run menu every time zoo window is closed
             RunMenu();
         }
-
 
         static void RunVeterinary()
         {

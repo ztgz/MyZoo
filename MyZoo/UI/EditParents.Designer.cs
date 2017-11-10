@@ -35,6 +35,7 @@
             this.infoLabel = new System.Windows.Forms.Label();
             this.editParentsBTN = new System.Windows.Forms.Button();
             this.succesLabel = new System.Windows.Forms.Label();
+            this.returnBTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label9
@@ -76,9 +77,10 @@
             // infoLabel
             // 
             this.infoLabel.AutoSize = true;
+            this.infoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.infoLabel.Location = new System.Drawing.Point(7, 13);
             this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(67, 17);
+            this.infoLabel.Size = new System.Drawing.Size(115, 29);
             this.infoLabel.TabIndex = 29;
             this.infoLabel.Text = "Animal ID";
             // 
@@ -100,11 +102,22 @@
             this.succesLabel.Size = new System.Drawing.Size(0, 17);
             this.succesLabel.TabIndex = 31;
             // 
+            // returnBTN
+            // 
+            this.returnBTN.Location = new System.Drawing.Point(204, 211);
+            this.returnBTN.Name = "returnBTN";
+            this.returnBTN.Size = new System.Drawing.Size(94, 41);
+            this.returnBTN.TabIndex = 32;
+            this.returnBTN.Text = "Return";
+            this.returnBTN.UseVisualStyleBackColor = true;
+            this.returnBTN.Click += new System.EventHandler(this.returnBTN_Click);
+            // 
             // EditParents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(310, 264);
+            this.Controls.Add(this.returnBTN);
             this.Controls.Add(this.succesLabel);
             this.Controls.Add(this.editParentsBTN);
             this.Controls.Add(this.infoLabel);
@@ -128,5 +141,6 @@
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Button editParentsBTN;
         private System.Windows.Forms.Label succesLabel;
+        private System.Windows.Forms.Button returnBTN;
     }
 }

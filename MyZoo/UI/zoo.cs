@@ -112,12 +112,17 @@ namespace MyZoo.UI
 
         private void addSpeciesBTN_Click(object sender, EventArgs e)
         {
+            this.Hide();
+
             AddSpecies addSpeciesForm = new AddSpecies(this);
+
             addSpeciesForm.Show();
         }
 
         private void editSpeciesBTN_Click(object sender, EventArgs e)
         {
+            this.Hide();
+
             EditSpecies editSpecies = new EditSpecies(this, speciesComboBox.Text, countryAddBox.Text);
 
             editSpecies.Show();
@@ -173,8 +178,11 @@ namespace MyZoo.UI
 
         private void OpenAnimalEditForm(int animalId, decimal? weight)
         {
+            this.Hide();
+
             //Open edit form
             EditAnimal editForm = new EditAnimal(animalId, weight, this);
+            
             editForm.Show();
         }
 
@@ -191,6 +199,9 @@ namespace MyZoo.UI
                     int.Parse(searchDataGridView[7, row].Value.ToString()),
                     this
                 );
+                
+                this.Hide();
+
                 parentsForm.Show();
             }
         }

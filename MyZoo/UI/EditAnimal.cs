@@ -61,5 +61,17 @@ namespace MyZoo.UI
             
             zoo.Search();
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            zoo.Show();
+
+            base.OnFormClosing(e);
+        }
+
+        private void returnBTN_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

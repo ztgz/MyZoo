@@ -35,6 +35,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.editAnimalBTN = new System.Windows.Forms.Button();
             this.infoLabel = new System.Windows.Forms.Label();
+            this.returnBTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // animalLabel
@@ -83,7 +84,7 @@
             // 
             // editAnimalBTN
             // 
-            this.editAnimalBTN.Location = new System.Drawing.Point(178, 168);
+            this.editAnimalBTN.Location = new System.Drawing.Point(206, 147);
             this.editAnimalBTN.Name = "editAnimalBTN";
             this.editAnimalBTN.Size = new System.Drawing.Size(105, 50);
             this.editAnimalBTN.TabIndex = 17;
@@ -99,11 +100,22 @@
             this.infoLabel.Size = new System.Drawing.Size(0, 17);
             this.infoLabel.TabIndex = 18;
             // 
+            // returnBTN
+            // 
+            this.returnBTN.Location = new System.Drawing.Point(206, 229);
+            this.returnBTN.Name = "returnBTN";
+            this.returnBTN.Size = new System.Drawing.Size(105, 52);
+            this.returnBTN.TabIndex = 19;
+            this.returnBTN.Text = "Return";
+            this.returnBTN.UseVisualStyleBackColor = true;
+            this.returnBTN.Click += new System.EventHandler(this.returnBTN_Click);
+            // 
             // EditAnimal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(323, 293);
+            this.Controls.Add(this.returnBTN);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.editAnimalBTN);
             this.Controls.Add(this.weightAddTextBox);
@@ -127,5 +139,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button editAnimalBTN;
         private System.Windows.Forms.Label infoLabel;
+        private System.Windows.Forms.Button returnBTN;
     }
 }

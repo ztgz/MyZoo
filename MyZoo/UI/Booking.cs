@@ -21,8 +21,6 @@ namespace MyZoo.UI
 
             LoadAnimals();
 
-            //SetBookingHistroy(GetIdOfSelectedRow(animalsDataGridView));
-
             RefreshTables();
         }
 
@@ -253,7 +251,8 @@ namespace MyZoo.UI
                 int animalId = (int)bookingHistoryDataGridView
                     [1,GetIndexOfSelectedRowOrCell(bookingHistoryDataGridView)]
                     .Value;
-                Diagnosis diagnosisForm = new Diagnosis(bookingId, animalId);
+                Diagnosis diagnosisForm = new Diagnosis(bookingId, animalId, this);
+                this.Hide();
                 diagnosisForm.Show();
             }
         }

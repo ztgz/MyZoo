@@ -18,16 +18,21 @@ namespace MyZoo.UI
 
         private int diagnosisId;
 
-        public Diagnosis(int bookingId, int animalId)
+        private Booking bookingForm;
+
+        public Diagnosis(int bookingId, int animalId, Booking bookingForm)
         {
             InitializeComponent();
+
+            this.bookingForm = bookingForm;
 
             //Gets diagnosis number for bookingId
             diagnosisId = _dataAccess.CreateAndGetDiagnosisId(bookingId);
 
             //info text
-            bookingIdLabel.Text = $"Edit information for booking {bookingId}. Journal regarding animal {animalId}"
-                + $"\n Diagnosis {diagnosisId}";
+            bookingIdLabel.Text = $"Edit information for booking id: {bookingId}. " +
+                                  $"\nJournal regarding animal id: {animalId}"
+                                  + $"\nDiagnosis id: {diagnosisId}";
             
             //Description text
             descriptionTextBox.Text = _dataAccess.GetDiagnosisJournal(diagnosisId);
@@ -122,6 +127,18 @@ namespace MyZoo.UI
             }
 
             return -1;
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            bookingForm.Show();
+
+            base.OnFormClosing(e);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

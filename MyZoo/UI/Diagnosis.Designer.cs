@@ -36,9 +36,10 @@
             this.medecinesComboBox = new System.Windows.Forms.ComboBox();
             this.addMedecineBTN = new System.Windows.Forms.Button();
             this.descriptionTextBox = new System.Windows.Forms.RichTextBox();
+            this.removeMedicine = new System.Windows.Forms.Button();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.medecineInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.removeMedicine = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.medicineDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.medecineInfoBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -46,7 +47,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 227);
+            this.label1.Location = new System.Drawing.Point(12, 101);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 17);
             this.label1.TabIndex = 0;
@@ -74,7 +75,7 @@
             this.medicineDataGridView.Name = "medicineDataGridView";
             this.medicineDataGridView.ReadOnly = true;
             this.medicineDataGridView.RowTemplate.Height = 24;
-            this.medicineDataGridView.Size = new System.Drawing.Size(232, 276);
+            this.medicineDataGridView.Size = new System.Drawing.Size(232, 219);
             this.medicineDataGridView.TabIndex = 2;
             // 
             // label2
@@ -89,16 +90,16 @@
             // medecinesComboBox
             // 
             this.medecinesComboBox.FormattingEnabled = true;
-            this.medecinesComboBox.Location = new System.Drawing.Point(483, 336);
+            this.medecinesComboBox.Location = new System.Drawing.Point(483, 277);
             this.medecinesComboBox.Name = "medecinesComboBox";
             this.medecinesComboBox.Size = new System.Drawing.Size(232, 24);
             this.medecinesComboBox.TabIndex = 4;
             // 
             // addMedecineBTN
             // 
-            this.addMedecineBTN.Location = new System.Drawing.Point(594, 375);
+            this.addMedecineBTN.Location = new System.Drawing.Point(603, 320);
             this.addMedecineBTN.Name = "addMedecineBTN";
-            this.addMedecineBTN.Size = new System.Drawing.Size(157, 44);
+            this.addMedecineBTN.Size = new System.Drawing.Size(131, 44);
             this.addMedecineBTN.TabIndex = 5;
             this.addMedecineBTN.Text = "Add Medicine";
             this.addMedecineBTN.UseVisualStyleBackColor = true;
@@ -106,12 +107,22 @@
             // 
             // descriptionTextBox
             // 
-            this.descriptionTextBox.Location = new System.Drawing.Point(18, 248);
+            this.descriptionTextBox.Location = new System.Drawing.Point(18, 122);
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(393, 94);
+            this.descriptionTextBox.Size = new System.Drawing.Size(393, 138);
             this.descriptionTextBox.TabIndex = 6;
             this.descriptionTextBox.Text = "";
             this.descriptionTextBox.TextChanged += new System.EventHandler(this.descriptionTextBox_TextChanged);
+            // 
+            // removeMedicine
+            // 
+            this.removeMedicine.Location = new System.Drawing.Point(456, 320);
+            this.removeMedicine.Name = "removeMedicine";
+            this.removeMedicine.Size = new System.Drawing.Size(131, 44);
+            this.removeMedicine.TabIndex = 7;
+            this.removeMedicine.Text = "Remove Medicine";
+            this.removeMedicine.UseVisualStyleBackColor = true;
+            this.removeMedicine.Click += new System.EventHandler(this.removeMedicine_Click);
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -124,21 +135,23 @@
             // 
             this.medecineInfoBindingSource.DataSource = typeof(MyZoo.Models.MedecineInfo);
             // 
-            // removeMedicine
+            // button1
             // 
-            this.removeMedicine.Location = new System.Drawing.Point(436, 375);
-            this.removeMedicine.Name = "removeMedicine";
-            this.removeMedicine.Size = new System.Drawing.Size(137, 44);
-            this.removeMedicine.TabIndex = 7;
-            this.removeMedicine.Text = "Remove Medicine";
-            this.removeMedicine.UseVisualStyleBackColor = true;
-            this.removeMedicine.Click += new System.EventHandler(this.removeMedicine_Click);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(49, 298);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(313, 89);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Return to booking";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Diagnosis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(763, 431);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.removeMedicine);
             this.Controls.Add(this.descriptionTextBox);
             this.Controls.Add(this.addMedecineBTN);
@@ -168,5 +181,6 @@
         private System.Windows.Forms.Button addMedecineBTN;
         private System.Windows.Forms.RichTextBox descriptionTextBox;
         private System.Windows.Forms.Button removeMedicine;
+        private System.Windows.Forms.Button button1;
     }
 }

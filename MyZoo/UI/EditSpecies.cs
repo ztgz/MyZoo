@@ -66,12 +66,26 @@ namespace MyZoo.UI
                 infoLabel.Text = speciesNameTextBox.Text + " were succesfully edited.";
 
                 zoo.LoadSpeciesComboBox();
+
+                zoo.Search();
             }
             else
             {
                 infoLabel.Text = speciesNameTextBox.Text + " edit failed.";
             }
 
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            zoo.Show();
+
+            base.OnFormClosing(e);
+        }
+
+        private void returnBTN_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

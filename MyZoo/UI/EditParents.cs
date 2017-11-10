@@ -90,5 +90,17 @@ namespace MyZoo.UI
             //reload the search box
             zoo.Search();
         }
+
+        private void returnBTN_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            zoo.Show();
+
+            base.OnFormClosing(e);
+        }
     }
 }

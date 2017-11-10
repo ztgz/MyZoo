@@ -39,6 +39,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.countryTextBox = new System.Windows.Forms.TextBox();
             this.infoLabel = new System.Windows.Forms.Label();
+            this.returnBTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -137,11 +138,22 @@
             this.infoLabel.Size = new System.Drawing.Size(0, 17);
             this.infoLabel.TabIndex = 11;
             // 
+            // returnBTN
+            // 
+            this.returnBTN.Location = new System.Drawing.Point(112, 390);
+            this.returnBTN.Name = "returnBTN";
+            this.returnBTN.Size = new System.Drawing.Size(191, 56);
+            this.returnBTN.TabIndex = 12;
+            this.returnBTN.Text = "Return to Animals";
+            this.returnBTN.UseVisualStyleBackColor = true;
+            this.returnBTN.Click += new System.EventHandler(this.returnBTN_Click);
+            // 
             // AddSpecies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(372, 458);
+            this.Controls.Add(this.returnBTN);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.countryTextBox);
             this.Controls.Add(this.button1);
@@ -173,5 +185,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox countryTextBox;
         private System.Windows.Forms.Label infoLabel;
+        private System.Windows.Forms.Button returnBTN;
     }
 }
