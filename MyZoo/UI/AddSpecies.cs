@@ -6,7 +6,6 @@ namespace MyZoo.UI
 {
     public partial class AddSpecies : Form
     {
-        //private readonly SqlCommands _sqlCommands;
         private DataAccess _dataAccess;
 
         private Zoo zoo;
@@ -19,11 +18,20 @@ namespace MyZoo.UI
 
             _dataAccess = new DataAccess();
 
+            //Load Enviorments into combobox
             LoadEnviorments();
 
+            //Load Food types into combobox
             LoadFoodTypes();
         }
-        
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            zoo.Show();
+
+            base.OnFormClosing(e);
+        }
+
         private void LoadEnviorments()
         {
             var enviorments = _dataAccess.GetEnviormentsNames();
@@ -48,41 +56,42 @@ namespace MyZoo.UI
             foodTypeComboBox.SelectedIndex = 0;
         }
 
+        /* Add species record */
         private void button1_Click(object sender, EventArgs e)
         {
+            //Get info about the specie to add
             string speciesName = speciesNameTextBox.Text;
+
             string country = countryTextBox.Text;
 
+            //Only add specie if namn contains characters
             if (speciesName.Length > 0)
             {
-                if (_dataAccess.AddSpecie(speciesName, enviormentComboBox.Text,
-                    foodTypeComboBox.Text, country))
+                //Try to add species
+                if ( _dataAccess.AddSpecie( speciesName, 
+                    enviormentComboBox.Text,
+                    foodTypeComboBox.Text, 
+                    country) )
                 {
                     infoLabel.Text = "The specie were added.";
 
                     speciesNameTextBox.Text = "";
                     countryTextBox.Text = "";
                     
-                    //reload the species combo box in zoo forms
+                    //Reload the species combo box in zoo forms
                     zoo.LoadSpeciesComboBox();
                 }
                 else
                 {
-                    infoLabel.Text = "Could not att specie. " +
-                                  "\nCheck that specie name dosen't exist.";
+                    infoLabel.Text = "Could not add specie. " +
+                                  "\nCheck that the specie name dosen't exist.";
                 }
             }
             else
             {
                 infoLabel.Text = "You have to specify a name for the specie.";
             }
-        }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            zoo.Show();
-
-            base.OnFormClosing(e);
         }
 
         private void returnBTN_Click(object sender, EventArgs e)

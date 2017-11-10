@@ -655,11 +655,11 @@ namespace MyZoo.DAL
 
 
         /*---------------------------------Methods regarding other---------------------------------*/
-        public void AddMedicineDiagnosisRelation(int diagnosisId, string Medicienname)
+        public void AddMedicineDiagnosisRelation(int diagnosisId, string medicienname)
         {
             using (var db = new ZooContext())
             {
-                Medicine medicine = db.Medicine.SingleOrDefault(m => m.MedicineName == Medicienname);
+                Medicine medicine = db.Medicine.SingleOrDefault(m => m.MedicineName == medicienname);
 
                 Diagnosis diagnosis = db.Diagnosis.SingleOrDefault(d => d.Id == diagnosisId);
 

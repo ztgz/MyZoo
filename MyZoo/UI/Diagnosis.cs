@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MyZoo.DAL;
+using MyZoo.Extensions;
 using MyZoo.Models;
 
 namespace MyZoo.UI
@@ -26,10 +27,11 @@ namespace MyZoo.UI
 
             this.bookingForm = bookingForm;
 
-            //Gets diagnosis number for bookingId
+            //Get the diagnosisID from the bookingId
+            //If diagonsis dosn't exsist, then it's created
             diagnosisId = _dataAccess.CreateAndGetDiagnosisId(bookingId);
 
-            //info text
+            //Info text
             bookingIdLabel.Text = $"Edit information for booking id: {bookingId}. " +
                                   $"\nJournal regarding animal id: {animalId}"
                                   + $"\nDiagnosis id: {diagnosisId}";
@@ -42,6 +44,13 @@ namespace MyZoo.UI
             FillMedicineList();
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            bookingForm.Show();
+
+            base.OnFormClosing(e);
+        }
+
         private void FillMedicineList()
         {
             medicineDataGridView.DataSource = _dataAccess.GetMedicinesInDiagnosis(diagnosisId)
@@ -51,40 +60,11 @@ namespace MyZoo.UI
         private void FillMedicineComboBox()
         {
             medecinesComboBox.Items.Clear();
+
             foreach (var medecine in _dataAccess.GetMedicineNames().ToArray())
             {
                 medecinesComboBox.Items.Add(medecine.Name);
             }
-        }
-
-        private void addMedecineBTN_Click(object sender, EventArgs e)
-        {
-            //name of the medicine that is being added
-            string medicineName = medecinesComboBox.Text;
-
-            //Try to add the medecine to medecine record
-            bool refilComboBox = _dataAccess.TryAddMedecine(medicineName);
-
-            bool addMedicine = true;
-
-            foreach (var medicine in _dataAccess.GetMedicinesInDiagnosis(diagnosisId))
-            {
-                if (medicine.MedicineName == medicineName)
-                {
-                    addMedicine = false; //medecine is already in journal
-                    break;
-                }
-            }
-
-            if(addMedicine)
-                _dataAccess.AddMedicineDiagnosisRelation(diagnosisId, medicineName);
-
-            //Refill combobox if new medicine was created
-            if(refilComboBox)
-                FillMedicineComboBox();
-
-            //Refill medicinelist
-            FillMedicineList();
         }
 
         private void descriptionTextBox_TextChanged(object sender, EventArgs e)
@@ -92,9 +72,40 @@ namespace MyZoo.UI
             _dataAccess.SetDiagnosisJournal(diagnosisId, descriptionTextBox.Text);
         }
 
+        private void addMedecineBTN_Click(object sender, EventArgs e)
+        {
+            //Name of the medicine that is being added
+            string medicineName = medecinesComboBox.Text;
+
+            //Try to add the medecine to medecine record
+            if (_dataAccess.TryAddMedecine(medicineName))
+                FillMedicineComboBox(); //Refill combobox if new medicine was created
+
+            //Keep track if the medicine should be added
+            bool addMedicine = true; 
+
+            foreach (var medicine in _dataAccess.GetMedicinesInDiagnosis(diagnosisId))
+            {
+                if (medicine.MedicineName == medicineName)
+                {
+                    //Medicine is already in journal
+                    addMedicine = false; 
+                    break;
+                }
+            }
+
+            //Add medicine to diagnosis
+            if(addMedicine)
+                _dataAccess.AddMedicineDiagnosisRelation(diagnosisId, medicineName);
+
+
+            //Refill medicinelist
+            FillMedicineList();
+        }
+
         private void removeMedicine_Click(object sender, EventArgs e)
         {
-            int rowIndex = GetIndexOfSelectedRowOrCell(medicineDataGridView);
+            int rowIndex = HelperMethod.GetSelectedRowIndex(medicineDataGridView);
 
             if (rowIndex >= 0)
             {
@@ -106,39 +117,11 @@ namespace MyZoo.UI
             }            
         }
 
-        private int GetIndexOfSelectedRowOrCell(DataGridView dw)
-        {
-            for (int i = 0; i < dw.RowCount; i++)
-            {
-                //if row is selected
-                if (dw.Rows[i].Selected)
-                {
-                    return i;
-                }
-
-                //if cell is selected
-                for (int x = 0; x < dw.ColumnCount; x++)
-                {
-                    if (dw[x, i].Selected)
-                    {
-                        return i;
-                    }
-                }
-            }
-
-            return -1;
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            bookingForm.Show();
-
-            base.OnFormClosing(e);
-        }
-
+        //Close form
         private void button1_Click(object sender, EventArgs e)
         {
             Close();
         }
+
     }
 }
