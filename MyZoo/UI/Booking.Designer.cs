@@ -58,6 +58,7 @@
             this.vetrinaryInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bookingInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bookedTimesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bookTimeBTN = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.vetrinaryDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.freeTimesDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.animalsDataGridView)).BeginInit();
@@ -325,11 +326,22 @@
             // 
             this.bookedTimesBindingSource.DataSource = typeof(MyZoo.Models.BookedTimes);
             // 
+            // bookTimeBTN
+            // 
+            this.bookTimeBTN.Location = new System.Drawing.Point(918, 165);
+            this.bookTimeBTN.Name = "bookTimeBTN";
+            this.bookTimeBTN.Size = new System.Drawing.Size(200, 54);
+            this.bookTimeBTN.TabIndex = 10;
+            this.bookTimeBTN.Text = "Book time";
+            this.bookTimeBTN.UseVisualStyleBackColor = true;
+            this.bookTimeBTN.Click += new System.EventHandler(this.bookTimeBTN_Click);
+            // 
             // Booking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1144, 560);
+            this.Controls.Add(this.bookTimeBTN);
             this.Controls.Add(this.searchTimesBTN);
             this.Controls.Add(this.bookingHistoryDataGridView);
             this.Controls.Add(this.label4);
@@ -387,5 +399,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn endDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn animalIdDataGridViewTextBoxColumn1;
         private System.Windows.Forms.BindingSource bookingInfoBindingSource1;
+        private System.Windows.Forms.Button bookTimeBTN;
     }
 }

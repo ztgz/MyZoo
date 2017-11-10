@@ -131,9 +131,6 @@ namespace MyZoo.UI
             }
 
             freeTimesDataGridView.DataSource = bookings;
-
-            //Refresh animal bookings history
-            SetBookingHistroy(animalId);
         }
 
         public bool IsBetweenDate(DateTime date, DateTime startDate, DateTime endDate)
@@ -179,14 +176,39 @@ namespace MyZoo.UI
 
         private void animalsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            LoadAvailableTimes();
-
-            SetBookingHistroy(GetIdOfSelectedRow(animalsDataGridView));
+            RefreshTables();
         }
 
         private void vetrinaryDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             LoadAvailableTimes();
+        }
+
+        private void bookTimeBTN_Click(object sender, EventArgs e)
+        {
+            int selectedRow = GetIndexOfSelectedRowOrCell(freeTimesDataGridView);
+            
+            if(selectedRow < 1)
+                return;
+
+            int vetId = (int)freeTimesDataGridView[0, selectedRow].Value;
+            int animalId = (int) freeTimesDataGridView[3, selectedRow].Value;
+
+            DateTime startDate = (DateTime) freeTimesDataGridView[1, selectedRow].Value;
+            DateTime endDate = (DateTime) freeTimesDataGridView[1, selectedRow].Value;
+
+            _dataAccess.AddBooking(animalId, vetId ,startDate, endDate);
+
+            RefreshTables();
+        }
+
+        private void RefreshTables()
+        {
+            //Load available booking times
+            LoadAvailableTimes();
+
+            //Load history of animal booking
+            SetBookingHistroy(GetIdOfSelectedRow(animalsDataGridView));
         }
     }
 }

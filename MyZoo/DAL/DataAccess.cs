@@ -413,6 +413,34 @@ namespace MyZoo.DAL
 
             return bookings;
         }
+
+        public bool AddBooking(int animalId, int veterinaryId, DateTime startDate, DateTime endDate)
+        {
+            bool booked = false;
+
+            using (var db = new ZooContext())
+            {
+                Animal animal = db.Animal.SingleOrDefault(a => a.Id == animalId);
+
+                Veterinary vet = db.Veterinary.SingleOrDefault(v => v.Id == veterinaryId);
+
+                Booking booking = new Booking()
+                {
+                    Animal = animal,
+                    Veterinary = vet,
+                    StartDate = startDate,
+                    EndDate = endDate,
+                };
+
+                db.Booking.Add(booking);
+
+                db.SaveChanges();
+
+                booked = true;
+            }
+
+            return booked;
+        }
     }
     
 }
