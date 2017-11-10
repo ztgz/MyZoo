@@ -441,6 +441,50 @@ namespace MyZoo.DAL
 
             return booked;
         }
+
+        public bool DeleteBooking(int bookingId)
+        {
+            bool removed = false;
+
+            using (var db = new ZooContext())
+            {
+                //Get all diagnosies for the booking
+                var diagnosies = db.Diagnosis.Where(d => d.BookingId == bookingId).ToList();
+
+                //Get and remove all connections between medicine and diagonsis, remove all related diagnosis
+                for (int i = diagnosies.Count - 1; i >= 0; i--)
+                {
+                    Diagnosis diagnois = diagnosies[i];
+
+                    var medecineDiagonsis = db.MedicineDiagnosisRelation
+                        .Where(r => r.DiagnosisId == diagnois.Id)
+                        .ToList();
+
+                    for (int x = medecineDiagonsis.Count-1; x >= 0; x--)
+                    {
+                        MedicineDiagnosisRelation md = medecineDiagonsis[x];
+                        db.Entry(md).State = EntityState.Deleted;
+                    }
+
+                    db.Entry(diagnois).State = EntityState.Deleted;
+                }
+
+                //save changes
+                //db.SaveChanges();
+
+                //remove booking
+                Booking booking = db.Booking.SingleOrDefault(b => b.Id == bookingId);
+                db.Booking.Attach(booking);
+                db.Booking.Remove(booking);
+
+                //save changes
+                db.SaveChanges();
+
+                removed = true;
+            }
+
+            return removed;
+        }
     }
     
 }

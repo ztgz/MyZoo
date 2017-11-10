@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MyZoo.DAL;
 using MyZoo.Models;
@@ -27,6 +22,8 @@ namespace MyZoo.UI
             LoadAnimals();
 
             //SetBookingHistroy(GetIdOfSelectedRow(animalsDataGridView));
+
+            RefreshTables();
         }
 
         public void LoadAnimals()
@@ -138,7 +135,6 @@ namespace MyZoo.UI
             return date >= startDate && date <= endDate;
         }
 
-
         private int GetIdOfSelectedRow(DataGridView dw)
         {
             int row = GetIndexOfSelectedRowOrCell(dw);
@@ -188,7 +184,7 @@ namespace MyZoo.UI
         {
             int selectedRow = GetIndexOfSelectedRowOrCell(freeTimesDataGridView);
             
-            if(selectedRow < 1)
+            if(selectedRow < 0)
                 return;
 
             int vetId = (int)freeTimesDataGridView[0, selectedRow].Value;
@@ -204,11 +200,47 @@ namespace MyZoo.UI
 
         private void RefreshTables()
         {
+            //remove info message
+            deleteInfoLabel.Text = "";
+
             //Load available booking times
             LoadAvailableTimes();
 
             //Load history of animal booking
             SetBookingHistroy(GetIdOfSelectedRow(animalsDataGridView));
+        }
+
+        private void deleteBookingBTN_Click(object sender, EventArgs e)
+        {
+            int bookingId = GetIdOfSelectedRow(bookingHistoryDataGridView);
+
+            //if bookingId is valid 
+            if (bookingId > 0)
+            {
+                //and if starttime is after current time
+                if ((DateTime) bookingHistoryDataGridView[3,
+                        GetIndexOfSelectedRowOrCell(bookingHistoryDataGridView)
+                    ].Value > DateTime.Now)
+                {
+                    //then remove booking
+                    _dataAccess.DeleteBooking(bookingId);
+
+                    RefreshTables();
+
+                    deleteInfoLabel.Text = "Booking successfully removed";
+                }
+                else
+                {
+                    deleteInfoLabel.Text = "You cannot delete times \nafter they started.";
+                }
+
+            }
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshTables();
         }
     }
 }
