@@ -17,13 +17,15 @@ namespace MyZoo.DataContext
 
         public int Id { get; set; }
 
-        public int Animal { get; set; }
+        public int AnimalId { get; set; }
 
-        public int StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public int EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         public int VeterinaryId { get; set; }
+
+        public virtual Animal Animal { get; set; }
 
         public virtual Veterinary Veterinary { get; set; }
 

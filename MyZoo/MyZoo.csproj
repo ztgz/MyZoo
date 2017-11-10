@@ -66,6 +66,7 @@
     <Compile Include="DataContext\Species.cs" />
     <Compile Include="DataContext\Veterinary.cs" />
     <Compile Include="DataContext\ZooContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnimalInfo.cs" />
     <Compile Include="Models\BookingInfo.cs" />
     <Compile Include="Models\SpeciesInfo.cs" />

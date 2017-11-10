@@ -30,6 +30,11 @@ namespace MyZoo.DataContext
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<Animal>()
+                .HasMany(e => e.Booking)
+                .WithRequired(e => e.Animal)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Animal>()
                 .HasMany(e => e.Relations)
                 .WithOptional(e => e.Animal)
                 .HasForeignKey(e => e.ChildId);
