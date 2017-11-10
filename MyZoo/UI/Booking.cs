@@ -242,5 +242,20 @@ namespace MyZoo.UI
         {
             RefreshTables();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int bookingId = GetIdOfSelectedRow(bookingHistoryDataGridView);
+
+            //if bookingId is valid 
+            if (bookingId > 0)
+            {
+                int animalId = (int)bookingHistoryDataGridView
+                    [1,GetIndexOfSelectedRowOrCell(bookingHistoryDataGridView)]
+                    .Value;
+                Diagnosis diagnosisForm = new Diagnosis(bookingId, animalId);
+                diagnosisForm.Show();
+            }
+        }
     }
 }

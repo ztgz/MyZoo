@@ -30,45 +30,46 @@
         {
             this.components = new System.ComponentModel.Container();
             this.vetrinaryDataGridView = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vetrinaryInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.freeTimesDataGridView = new System.Windows.Forms.DataGridView();
-            this.vetIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.animalIdDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bookingInfoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.animalsDataGridView = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.speciesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simpleAnimalBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.bookingHistoryDataGridView = new System.Windows.Forms.DataGridView();
+            this.searchTimesBTN = new System.Windows.Forms.Button();
+            this.bookTimeBTN = new System.Windows.Forms.Button();
+            this.deleteBookingBTN = new System.Windows.Forms.Button();
+            this.deleteInfoLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.bookingIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.animalIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.veterinaryIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bookedTimesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.searchTimesBTN = new System.Windows.Forms.Button();
-            this.bookTimeBTN = new System.Windows.Forms.Button();
-            this.deleteBookingBTN = new System.Windows.Forms.Button();
+            this.idDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.speciesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simpleAnimalBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.vetIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.animalIdDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bookingInfoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vetrinaryInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bookingInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bookedTimesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.deleteInfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.vetrinaryDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vetrinaryInfoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.freeTimesDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bookingInfoBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.animalsDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.simpleAnimalBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookingHistoryDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookedTimesBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.simpleAnimalBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookingInfoBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vetrinaryInfoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookingInfoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookedTimesBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -90,25 +91,6 @@
             this.vetrinaryDataGridView.Size = new System.Drawing.Size(227, 216);
             this.vetrinaryDataGridView.TabIndex = 0;
             this.vetrinaryDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.vetrinaryDataGridView_CellClick);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 35;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // vetrinaryInfoBindingSource
-            // 
-            this.vetrinaryInfoBindingSource.DataSource = typeof(MyZoo.Models.VetrinaryInfo);
             // 
             // label1
             // 
@@ -138,38 +120,6 @@
             this.freeTimesDataGridView.RowTemplate.Height = 24;
             this.freeTimesDataGridView.Size = new System.Drawing.Size(603, 216);
             this.freeTimesDataGridView.TabIndex = 2;
-            // 
-            // vetIdDataGridViewTextBoxColumn
-            // 
-            this.vetIdDataGridViewTextBoxColumn.DataPropertyName = "VetId";
-            this.vetIdDataGridViewTextBoxColumn.HeaderText = "VetId";
-            this.vetIdDataGridViewTextBoxColumn.Name = "vetIdDataGridViewTextBoxColumn";
-            this.vetIdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // startDataGridViewTextBoxColumn
-            // 
-            this.startDataGridViewTextBoxColumn.DataPropertyName = "Start";
-            this.startDataGridViewTextBoxColumn.HeaderText = "Start";
-            this.startDataGridViewTextBoxColumn.Name = "startDataGridViewTextBoxColumn";
-            this.startDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // endDataGridViewTextBoxColumn
-            // 
-            this.endDataGridViewTextBoxColumn.DataPropertyName = "End";
-            this.endDataGridViewTextBoxColumn.HeaderText = "End";
-            this.endDataGridViewTextBoxColumn.Name = "endDataGridViewTextBoxColumn";
-            this.endDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // animalIdDataGridViewTextBoxColumn1
-            // 
-            this.animalIdDataGridViewTextBoxColumn1.DataPropertyName = "AnimalId";
-            this.animalIdDataGridViewTextBoxColumn1.HeaderText = "AnimalId";
-            this.animalIdDataGridViewTextBoxColumn1.Name = "animalIdDataGridViewTextBoxColumn1";
-            this.animalIdDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // bookingInfoBindingSource1
-            // 
-            this.bookingInfoBindingSource1.DataSource = typeof(MyZoo.Models.BookingInfo);
             // 
             // label2
             // 
@@ -210,25 +160,6 @@
             this.animalsDataGridView.TabIndex = 5;
             this.animalsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.animalsDataGridView_CellClick);
             // 
-            // idDataGridViewTextBoxColumn1
-            // 
-            this.idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
-            this.idDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn1.Width = 35;
-            // 
-            // speciesDataGridViewTextBoxColumn
-            // 
-            this.speciesDataGridViewTextBoxColumn.DataPropertyName = "Species";
-            this.speciesDataGridViewTextBoxColumn.HeaderText = "Species";
-            this.speciesDataGridViewTextBoxColumn.Name = "speciesDataGridViewTextBoxColumn";
-            this.speciesDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // simpleAnimalBindingSource
-            // 
-            this.simpleAnimalBindingSource.DataSource = typeof(MyZoo.Models.SimpleAnimal);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -268,6 +199,54 @@
             this.bookingHistoryDataGridView.RowTemplate.Height = 24;
             this.bookingHistoryDataGridView.Size = new System.Drawing.Size(603, 214);
             this.bookingHistoryDataGridView.TabIndex = 8;
+            // 
+            // searchTimesBTN
+            // 
+            this.searchTimesBTN.Location = new System.Drawing.Point(918, 93);
+            this.searchTimesBTN.Name = "searchTimesBTN";
+            this.searchTimesBTN.Size = new System.Drawing.Size(200, 47);
+            this.searchTimesBTN.TabIndex = 9;
+            this.searchTimesBTN.Text = "Search free times";
+            this.searchTimesBTN.UseVisualStyleBackColor = true;
+            this.searchTimesBTN.Click += new System.EventHandler(this.searchTimesBTN_Click);
+            // 
+            // bookTimeBTN
+            // 
+            this.bookTimeBTN.Location = new System.Drawing.Point(918, 165);
+            this.bookTimeBTN.Name = "bookTimeBTN";
+            this.bookTimeBTN.Size = new System.Drawing.Size(200, 54);
+            this.bookTimeBTN.TabIndex = 10;
+            this.bookTimeBTN.Text = "Book time";
+            this.bookTimeBTN.UseVisualStyleBackColor = true;
+            this.bookTimeBTN.Click += new System.EventHandler(this.bookTimeBTN_Click);
+            // 
+            // deleteBookingBTN
+            // 
+            this.deleteBookingBTN.Location = new System.Drawing.Point(918, 332);
+            this.deleteBookingBTN.Name = "deleteBookingBTN";
+            this.deleteBookingBTN.Size = new System.Drawing.Size(189, 45);
+            this.deleteBookingBTN.TabIndex = 11;
+            this.deleteBookingBTN.Text = "Delete time";
+            this.deleteBookingBTN.UseVisualStyleBackColor = true;
+            this.deleteBookingBTN.Click += new System.EventHandler(this.deleteBookingBTN_Click);
+            // 
+            // deleteInfoLabel
+            // 
+            this.deleteInfoLabel.AutoSize = true;
+            this.deleteInfoLabel.Location = new System.Drawing.Point(927, 400);
+            this.deleteInfoLabel.Name = "deleteInfoLabel";
+            this.deleteInfoLabel.Size = new System.Drawing.Size(0, 17);
+            this.deleteInfoLabel.TabIndex = 12;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(918, 461);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(189, 47);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Diagnosis";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // bookingIdDataGridViewTextBoxColumn
             // 
@@ -311,35 +290,75 @@
             // 
             this.bookedTimesBindingSource1.DataSource = typeof(MyZoo.Models.BookedTimes);
             // 
-            // searchTimesBTN
+            // idDataGridViewTextBoxColumn1
             // 
-            this.searchTimesBTN.Location = new System.Drawing.Point(918, 93);
-            this.searchTimesBTN.Name = "searchTimesBTN";
-            this.searchTimesBTN.Size = new System.Drawing.Size(200, 47);
-            this.searchTimesBTN.TabIndex = 9;
-            this.searchTimesBTN.Text = "Search free times";
-            this.searchTimesBTN.UseVisualStyleBackColor = true;
-            this.searchTimesBTN.Click += new System.EventHandler(this.searchTimesBTN_Click);
+            this.idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn1.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
+            this.idDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn1.Width = 35;
             // 
-            // bookTimeBTN
+            // speciesDataGridViewTextBoxColumn
             // 
-            this.bookTimeBTN.Location = new System.Drawing.Point(918, 165);
-            this.bookTimeBTN.Name = "bookTimeBTN";
-            this.bookTimeBTN.Size = new System.Drawing.Size(200, 54);
-            this.bookTimeBTN.TabIndex = 10;
-            this.bookTimeBTN.Text = "Book time";
-            this.bookTimeBTN.UseVisualStyleBackColor = true;
-            this.bookTimeBTN.Click += new System.EventHandler(this.bookTimeBTN_Click);
+            this.speciesDataGridViewTextBoxColumn.DataPropertyName = "Species";
+            this.speciesDataGridViewTextBoxColumn.HeaderText = "Species";
+            this.speciesDataGridViewTextBoxColumn.Name = "speciesDataGridViewTextBoxColumn";
+            this.speciesDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // deleteBookingBTN
+            // simpleAnimalBindingSource
             // 
-            this.deleteBookingBTN.Location = new System.Drawing.Point(918, 332);
-            this.deleteBookingBTN.Name = "deleteBookingBTN";
-            this.deleteBookingBTN.Size = new System.Drawing.Size(189, 45);
-            this.deleteBookingBTN.TabIndex = 11;
-            this.deleteBookingBTN.Text = "Delete time";
-            this.deleteBookingBTN.UseVisualStyleBackColor = true;
-            this.deleteBookingBTN.Click += new System.EventHandler(this.deleteBookingBTN_Click);
+            this.simpleAnimalBindingSource.DataSource = typeof(MyZoo.Models.SimpleAnimal);
+            // 
+            // vetIdDataGridViewTextBoxColumn
+            // 
+            this.vetIdDataGridViewTextBoxColumn.DataPropertyName = "VetId";
+            this.vetIdDataGridViewTextBoxColumn.HeaderText = "VetId";
+            this.vetIdDataGridViewTextBoxColumn.Name = "vetIdDataGridViewTextBoxColumn";
+            this.vetIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // startDataGridViewTextBoxColumn
+            // 
+            this.startDataGridViewTextBoxColumn.DataPropertyName = "Start";
+            this.startDataGridViewTextBoxColumn.HeaderText = "Start";
+            this.startDataGridViewTextBoxColumn.Name = "startDataGridViewTextBoxColumn";
+            this.startDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // endDataGridViewTextBoxColumn
+            // 
+            this.endDataGridViewTextBoxColumn.DataPropertyName = "End";
+            this.endDataGridViewTextBoxColumn.HeaderText = "End";
+            this.endDataGridViewTextBoxColumn.Name = "endDataGridViewTextBoxColumn";
+            this.endDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // animalIdDataGridViewTextBoxColumn1
+            // 
+            this.animalIdDataGridViewTextBoxColumn1.DataPropertyName = "AnimalId";
+            this.animalIdDataGridViewTextBoxColumn1.HeaderText = "AnimalId";
+            this.animalIdDataGridViewTextBoxColumn1.Name = "animalIdDataGridViewTextBoxColumn1";
+            this.animalIdDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // bookingInfoBindingSource1
+            // 
+            this.bookingInfoBindingSource1.DataSource = typeof(MyZoo.Models.BookingInfo);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 35;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // vetrinaryInfoBindingSource
+            // 
+            this.vetrinaryInfoBindingSource.DataSource = typeof(MyZoo.Models.VetrinaryInfo);
             // 
             // bookingInfoBindingSource
             // 
@@ -349,19 +368,12 @@
             // 
             this.bookedTimesBindingSource.DataSource = typeof(MyZoo.Models.BookedTimes);
             // 
-            // deleteInfoLabel
-            // 
-            this.deleteInfoLabel.AutoSize = true;
-            this.deleteInfoLabel.Location = new System.Drawing.Point(927, 400);
-            this.deleteInfoLabel.Name = "deleteInfoLabel";
-            this.deleteInfoLabel.Size = new System.Drawing.Size(0, 17);
-            this.deleteInfoLabel.TabIndex = 12;
-            // 
             // Booking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1144, 560);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.deleteInfoLabel);
             this.Controls.Add(this.deleteBookingBTN);
             this.Controls.Add(this.bookTimeBTN);
@@ -378,13 +390,13 @@
             this.Name = "Booking";
             this.Text = "Booking";
             ((System.ComponentModel.ISupportInitialize)(this.vetrinaryDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vetrinaryInfoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.freeTimesDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bookingInfoBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.animalsDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.simpleAnimalBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookingHistoryDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookedTimesBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.simpleAnimalBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookingInfoBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vetrinaryInfoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookingInfoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookedTimesBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -425,5 +437,6 @@
         private System.Windows.Forms.Button bookTimeBTN;
         private System.Windows.Forms.Button deleteBookingBTN;
         private System.Windows.Forms.Label deleteInfoLabel;
+        private System.Windows.Forms.Button button1;
     }
 }

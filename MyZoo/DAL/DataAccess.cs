@@ -485,6 +485,84 @@ namespace MyZoo.DAL
 
             return removed;
         }
+
+        public BindingList<MedecineInfo> GetMedicineNames()
+        {
+            BindingList<MedecineInfo> medicineList = null;
+
+            using (var db = new ZooContext())
+            {
+                var meds = db.Medicine.Select(m => new MedecineInfo
+                {
+                    Name = m.MedicineName
+                });
+                medicineList = new BindingList<MedecineInfo>(meds.ToList());
+            }
+
+            return medicineList;
+        }
+
+        public BindingList<Medicine> GetMedicinesInDiagnosis(int diagnosisId)
+        {
+            BindingList<Medicine> medicineList = null;
+
+            using (var db = new ZooContext())
+            {
+                var meds = db.MedicineDiagnosisRelation.Where(md => md.DiagnosisId == diagnosisId).Select(m => m.Medicine);
+
+                medicineList = new BindingList<Medicine>(meds.ToList());
+            }
+
+            return medicineList;
+        }
+
+        public void AddMedicineDiagnosisRelation(int diagnosisId, string Medicienname)
+        {
+            using (var db = new ZooContext())
+            {
+                Medicine medicine = db.Medicine.SingleOrDefault(m => m.MedicineName == Medicienname);
+
+                Diagnosis diagnosis = db.Diagnosis.SingleOrDefault(d => d.Id == diagnosisId);
+
+                MedicineDiagnosisRelation mdr = new MedicineDiagnosisRelation()
+                {
+                    Medicine = medicine,
+                    Diagnosis = diagnosis
+                };
+
+                db.MedicineDiagnosisRelation.Add(mdr);
+
+                db.SaveChanges();
+            }
+        }
+
+        public bool TryAddMedecine(string medicineName)
+        {
+            if (string.IsNullOrEmpty(medicineName))
+                return false;
+
+            bool addedMedecine = false;
+
+            using (var db = new ZooContext())
+            {
+                //add medecien if it does not exist
+                if (db.Medicine.SingleOrDefault(m => m.MedicineName == medicineName) == null)
+                {
+                    Medicine med = new Medicine
+                    {
+                        MedicineName = medicineName
+                    };
+
+                    db.Medicine.Add(med);
+
+                    db.SaveChanges();
+
+                    addedMedecine = true;
+                }
+            }
+
+            return addedMedecine;
+        }
     }
     
 }

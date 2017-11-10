@@ -70,6 +70,7 @@
     <Compile Include="Models\AnimalInfo.cs" />
     <Compile Include="Models\BookedTimes.cs" />
     <Compile Include="Models\BookingInfo.cs" />
+    <Compile Include="Models\MedecineInfo.cs" />
     <Compile Include="Models\SimpleAnimal.cs" />
     <Compile Include="Models\SpeciesInfo.cs" />
     <Compile Include="Models\VetrinaryInfo.cs" />
@@ -86,6 +87,12 @@
     </Compile>
     <Compile Include="UI\Booking.Designer.cs">
       <DependentUpon>Booking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Diagnosis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Diagnosis.Designer.cs">
+      <DependentUpon>Diagnosis.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\EditAnimal.cs">
       <SubType>Form</SubType>
@@ -132,6 +139,9 @@
     <EmbeddedResource Include="UI\Booking.resx">
       <DependentUpon>Booking.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Diagnosis.resx">
+      <DependentUpon>Diagnosis.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\EditAnimal.resx">
       <DependentUpon>EditAnimal.cs</DependentUpon>
     </EmbeddedResource>
@@ -151,6 +161,7 @@
     <None Include="Properties\DataSources\MyZoo.Models.AnimalInfo.datasource" />
     <None Include="Properties\DataSources\MyZoo.Models.BookedTimes.datasource" />
     <None Include="Properties\DataSources\MyZoo.Models.BookingInfo.datasource" />
+    <None Include="Properties\DataSources\MyZoo.Models.MedecineInfo.datasource" />
     <None Include="Properties\DataSources\MyZoo.Models.SimpleAnimal.datasource" />
     <None Include="Properties\DataSources\MyZoo.Models.VetrinaryInfo.datasource" />
     <None Include="Properties\Settings.settings">
