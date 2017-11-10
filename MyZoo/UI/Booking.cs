@@ -52,7 +52,7 @@ namespace MyZoo.UI
                 return;
 
             //if date is in the future and on working day, fill list with all possible times
-            if (date >= DateTime.Now && date.DayOfWeek != DayOfWeek.Sunday)
+            if (date.Date >= DateTime.Now.Date && date.DayOfWeek != DayOfWeek.Sunday)
             {
                 for (int startHour = 9; startHour < 15; startHour++)
                 {
