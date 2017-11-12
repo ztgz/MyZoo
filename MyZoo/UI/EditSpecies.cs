@@ -60,7 +60,7 @@ namespace MyZoo.UI
         private void editSpeciesBTN_Click(object sender, EventArgs e)
         {
             //Edit specie
-            if (_dataAccess.EditSpecie(speciesNameTextBox.Text, enviormentComboBox.Text, foodTypeComboBox.Text,
+            if (_dataAccess.EditSpecies(speciesNameTextBox.Text, enviormentComboBox.Text, foodTypeComboBox.Text,
                 countryTextBox.Text))
             {
                 infoLabel.Text = speciesNameTextBox.Text + " were succesfully edited.";

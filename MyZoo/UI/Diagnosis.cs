@@ -80,7 +80,7 @@ namespace MyZoo.UI
 
             foreach (var medicine in _dataAccess.GetMedicinesInDiagnosis(diagnosisId))
             {
-                if (medicine.MedicineName == medicineName)
+                if (medicine.MedicineName.ToLower() == medicineName.ToLower())
                 {
                     //Medicine is already in journal
                     addMedicine = false; 

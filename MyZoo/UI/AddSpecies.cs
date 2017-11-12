@@ -68,7 +68,7 @@ namespace MyZoo.UI
             if (speciesName.Length > 0)
             {
                 //Try to add species
-                if ( _dataAccess.AddSpecie( speciesName, 
+                if ( _dataAccess.AddSpecies( speciesName, 
                     enviormentComboBox.Text,
                     foodTypeComboBox.Text, 
                     country) )

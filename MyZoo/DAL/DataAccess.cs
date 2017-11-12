@@ -221,7 +221,7 @@ namespace MyZoo.DAL
             return specie;
         }
 
-        public bool AddSpecie(string name, string enviorment, string foodType, string country)
+        public bool AddSpecies(string name, string enviorment, string foodType, string country)
         {
             //Get all species
             var listOfSpecies = GetSpecieses();
@@ -229,7 +229,7 @@ namespace MyZoo.DAL
             //Specie should not be added if it already exist
             foreach (var speciese in listOfSpecies)
             {
-                if (speciese.SName == name)
+                if (speciese.SName.ToLower() == name.ToLower())
                     return false;
             }
 
@@ -255,7 +255,7 @@ namespace MyZoo.DAL
             return true;
         }
 
-        public bool EditSpecie(string name, string enviorment, string foodType, string country)
+        public bool EditSpecies(string name, string enviorment, string foodType, string country)
         {
             bool specieEdited = false;
 
@@ -546,7 +546,7 @@ namespace MyZoo.DAL
             using (var db = new ZooContext())
             {
                 //Add medicine if it does not exist
-                if (db.Medicine.SingleOrDefault(m => m.MedicineName == medicineName) == null)
+                if (db.Medicine.SingleOrDefault(m => m.MedicineName.ToLower() == medicineName.ToLower()) == null)
                 {
                     Medicine med = new Medicine
                     {
