@@ -18,9 +18,11 @@ namespace MyZoo.UI
 
             _dataAccess = new DataAccess();
 
+            dateTimePicker1.Value = DateTime.Now;
+
             //Load All veterinaries
             vetrinaryDataGridView.DataSource = _dataAccess.GetVetrinariesInfo();
-
+            
             LoadAnimals();
 
         }
