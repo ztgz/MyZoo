@@ -305,11 +305,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(364, 137);
+            this.label7.Location = new System.Drawing.Point(330, 140);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 17);
+            this.label7.Size = new System.Drawing.Size(97, 17);
             this.label7.TabIndex = 17;
-            this.label7.Text = "Country";
+            this.label7.Text = "Species origin";
             // 
             // countryAddBox
             // 
